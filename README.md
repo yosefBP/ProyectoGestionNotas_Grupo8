@@ -9,5 +9,9 @@ que cuenta cada equipo
 
 ### Authors 🗒
 **Jose David Bermejo Padilla Back-end**
+
+
 **Brandon Martinez Cardona Back-end**
+
+
 **Yosef Benavraham Pardo Back-end**
