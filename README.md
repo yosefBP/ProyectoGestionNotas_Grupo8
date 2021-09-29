@@ -7,7 +7,7 @@
 que cuenta cada equipo
 - Servidor en la nube para albergar la aplicación WEB
 
-### authors 🗒
+### Authors 🗒
 - Jose David Bermejo Padilla Back-end
 - Brandon Martinez Cardona Back-end
 - Yosef Benavraham Pardo Back-end
