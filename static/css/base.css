@@ -1,10 +1,13 @@
 html {
     min-height: 100%;
-    position: relative;
   }
   body {
     margin: 0px;
+    margin-bottom: 40px;
   }
+
+
+  /* HEADER */
 
 .header{
     display: flex;
@@ -36,6 +39,12 @@ span{
 
 .icon-header{
     margin-left: 5px;
+}
+
+/* FOOTER */
+
+.container-fluid {
+    padding-left: 0px !important;
 }
 
 .bg-grey {
@@ -97,8 +106,7 @@ margin-left: 7px;
 
 a:hover {
 text-decoration: none;
-color: #f5f5f5 !important;
-
+color: #333;
 }
 
 .logo-part {
@@ -129,4 +137,33 @@ height: 100%;
 
 #soporte{
     color: #f5f5f5;
+}
+
+/* MENU */
+
+
+.bg-light {
+    background-color: darkgrey !important;
+}
+.sidebar .nav-link.active {
+    color: rgb(15, 166, 177);
+}
+.sidebar .nav-link {
+    font-weight: 500;
+    color: #333;
+}
+.sidebar .nav-link:hover {
+    color: rgb(15, 166, 177);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px 0 0;
+}
+
+.sidebar-sticky.pt-3 {
+    border-right: solid .5px #e9ecef;
 }
