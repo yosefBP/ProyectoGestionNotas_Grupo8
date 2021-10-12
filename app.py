@@ -15,12 +15,16 @@ def login():
     else:
         formRequest = LoginForm(request.form)
         if formRequest.validate_on_submit() == True and formRequest.e_mail.data == 'yosef@gmail.com' :
-            return dashboardSuperAdmin()
+            return dashboardAdmin()
         elif formRequest.validate_on_submit() == True:
             return '<h1>Success</h1>'
         else:
             return '<h1>Failed</h1>'
 
 @app.route('/administrador')
-def dashboardSuperAdmin():
-    return render_template('dashboard.html')
+def dashboardAdmin():
+    return render_template('administrador/home_admin.html')
+
+@app.route('/administrador/materias')
+def adminMaterias():
+    return render_template('administrador/materias.html')

@@ -1,0 +1,36 @@
+   <div class="container-fluid">
+    <div class="row">
+       <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+          <div class="sidebar-sticky pt-3">
+             <ul class="nav flex-column">
+                   <li class="nav-item">
+                      <a class="nav-link active" href="{{ url_for('dashboardAdmin') }}">
+                         DASHBOARD ADMINISTRADOR
+                      </a>
+                   </li>
+                   <li class="nav-item">
+                      <a class="nav-link" href="#">
+                         Administrar Materias
+                      </a>
+                      <ul class="nav flex-column">
+                        <li li class="" ><a class="nav-link" href="{{ url_for('adminMaterias') }}">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar materias</a></li>
+                        <li li class=""><a class="nav-link" href="#">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar actividades</a></li>
+                        <li li class=""><a class="nav-link" href="#">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar notas</a></li>
+                        </ul>
+                   </li>
+                   <li class="nav-item">
+                      <a class="nav-link" href="#">
+                         Administrar Usuarios
+                      </a>
+                   </li>
+                   <li class="nav-item">
+                      <a class="nav-link" href="#">
+                         Informacion Personal
+                      </a>
+                   </li>
+             </ul>
+          </div>
+       </nav>

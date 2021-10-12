@@ -1,0 +1,26 @@
+/* TABLAS */
+
+h1{    
+    font-weight: bold;
+    /*font-family: 'Playfair Display', serif;*/
+    text-align: center;
+    margin-bottom: 6%;
+    margin-top: 6%;
+    text-align: center;
+    
+}
+
+.error{
+    background-color: rgba(255, 40, 40, 0.2)
+}
+
+#errores{
+    font-size: 10px;
+    color:red;
+    font-size: italic;
+    text-align: center;
+}
+
+#tabla-standart{
+    padding-top: 5%;
+}
