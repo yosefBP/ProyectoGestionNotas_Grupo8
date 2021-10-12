@@ -5,7 +5,7 @@
 - Realizado con lenguaje Python
 - Framework Flask
 - Diseño de base de datos relacional SQLite
-- Servidor en la nube para albergar la aplicación WEB
+- Despliegue de la aplicacion WEB en Servidor de la nube
 
 ### Autores 🗒
 **Jose David Bermejo Padilla** Back-end
