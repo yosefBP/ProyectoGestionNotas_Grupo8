@@ -1,111 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/base.css">
+
+    <!-- Links Bootstrap - CSS - googleapis-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <!-- Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-    <title>Layout</title>
+
+    <!-- EXTRAS -->
+      {% block extras %}
+      {% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+   
 </head>
 <body>
    <!--HEADER-->
-    <div class="header">
-      <div>
-         <img src="../static/img/logo.jpg" id="icon-logo">
-      </div>
-      <div id="sesion">
-         <span>Rol</span>
-         <img src="https://img.icons8.com/material/24/000000/user--v1.png" class="icon-header"/>
-         <span>Nombre usuario</span>
-         <a href="#"><img src="https://img.icons8.com/material/24/000000/shutdown--v1.png"  class="icon-header"/></a>
-      </div>
-    </div>
+      {% include 'header.html' %}
     <!-- END HEADER-->
 
-   <!--MENU-->
-   <div class="container-fluid">
-      <div class="row">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
-         <div class="sidebar-sticky pt-3">
-            <ul class="nav flex-column">
-                  <li class="nav-item">
-                  <a class="nav-link active" href="#">
-                     <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>
-                     Dashboard Superadministrador
-                  </a>
-                  </li>
-                  <li class="nav-item">
-                  <a class="nav-link" href="#">
-                     <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>
-                     Administrar Materias
-                  </a>
-                  </li>
-                  </li>
-                  <li class="nav-item">
-                  <a class="nav-link" href="#">
-                     <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>
-                     Administrar Usuarios
-                  </a>
-                  </li>
-                  <li class="nav-item">
-                  <a class="nav-link" href="#">
-                     <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>
-                     Informacion Personal
-                  </a>
-                  </li>
-            </ul>
-         </div>
-      </nav>
-   </div>
-   <!-- END MENU -->
+    <!--MENU-->
+      {% include 'administrador/menu_admin.html' %}
+    <!-- END MENU -->
 
-    {% block contenido %}
-    {% endblock %}
+         <!-- CONTENT -->
+            {% block contenido %}
+            {% endblock %}
+         <!-- END CONTENT -->
+      </div>
+   </div>
 
    <!--FOOTER-->
-   <footer class="container-fluid bg-grey py-5">
-       <div class="container">
-          <div class="row">
-             <div class="col-md-6">
-                <div class="row">
-                   <div class="col-md-6 ">
-                      <div class="logo-part">
-                         <img src="../static/img/logo.jpg" class="w-50 logo-footer">
-                      </div>
-                   </div>
-                   <div class="col-md-6 px-4">
-                      <h6>Contactenos</h6>
-                      <div id="e-mail">
-                       <img src="../static/img/email-white.png" style=" width: 25px;" id="mail-logo">
-                       <a href="#" id="soporte">
-                         <p>Buzon de soporte</p>
-                       </a>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-          <br>
-          <div id="line-up" class="row">
-              <p>Grupo 8 App Gestion de Notas <br> Ciclo 3 Desarrollo de Software UniNorte</p>
-              <div id="icons">
-                 <p>Encuentranos en  </p>
-                 <div class="social">
-                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                 </div>
-              </div>
-          </div>
-       </div>
-       </footer>
-       <!--END FOOTER-->
+      {% include 'footer.html' %}
+   <!--END FOOTER-->
+
+   <!--SCRIPTS-->
+      {% block Scripts %}
+      {% endblock %}
+   <!--END SCRIPTS-->
 </body>
 </html>
