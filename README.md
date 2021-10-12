@@ -7,7 +7,7 @@
 - Diseño de base de datos relacional SQLite
 - Servidor en la nube para albergar la aplicación WEB
 
-### Authors 🗒
+### Autores 🗒
 **Jose David Bermejo Padilla** Back-end
 
 **Brandon Martinez Cardona** Back-end
