@@ -28,3 +28,7 @@ def dashboardAdmin():
 @app.route('/administrador/materias')
 def adminMaterias():
     return render_template('administrador/materias.html')
+
+@app.route('/estudiante/materias/')
+def estudianteMaterias():
+    return render_template('estudiante/main_estudiante.html')
