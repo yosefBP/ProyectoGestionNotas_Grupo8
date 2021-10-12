@@ -31,4 +31,4 @@ def adminMaterias():
 
 @app.route('/estudiante/materias/')
 def estudianteMaterias():
-    return render_template('estudiante/main_estudiante.html')
+    return render_template('estudiante/home_estudiante.html')
