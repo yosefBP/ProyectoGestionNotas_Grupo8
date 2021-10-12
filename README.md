@@ -2,7 +2,7 @@
 
  El proyecto tendra las siguientes características:
 
-- Sera realizado con lenguaje Python
+- Realizado con lenguaje Python
 - Framework Flask
 - Diseño de base de datos relacional SQLite
 - Servidor en la nube para albergar la aplicación WEB
