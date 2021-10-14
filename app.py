@@ -21,14 +21,42 @@ def login():
         else:
             return '<h1>Failed</h1>'
 
+# ADMINISTRADOR
 @app.route('/administrador')
 def dashboardAdmin():
     return render_template('administrador/home_admin.html')
 
-@app.route('/administrador/materias')
+@app.route('/administrador/gestionar-materias')
 def adminMaterias():
-    return render_template('administrador/materias.html')
+    return render_template('administrador/admin_materias.html')
 
+@app.route('/administrador/gestionar-actividades')
+def adminActiv():
+    return render_template('administrador/admin_actividades.html')
+
+@app.route('/administrador/calificaciones-y-retroalimentaciones')
+def califRetroalim():
+    return render_template('administrador/califi_retroalim.html')
+
+@app.route('/administrador/gestionar-usuarios')
+def adminUsuario():
+    return render_template('administrador/admin_usuarios.html')
+
+@app.route('/administrador/gestionar-docente')
+def adminDocente():
+    return render_template('administrador/admin_docente.html')
+
+@app.route('/administrador/gestionar-estudiante')
+def adminEstudiante():
+    return render_template('administrador/admin_estudiante.html')
+
+@app.route('/administrador/informacion-personal')
+def infoAdmin():
+    return render_template('administrador/info_admin.html')
+
+# ESTUDIANTE
 @app.route('/estudiante/materias/')
 def estudianteMaterias():
     return render_template('estudiante/home_estudiante.html')
+
+# DOCENTE
