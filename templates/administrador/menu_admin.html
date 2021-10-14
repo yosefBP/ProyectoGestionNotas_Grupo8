@@ -5,30 +5,35 @@
              <ul class="nav flex-column">
                    <li class="nav-item">
                       <a class="nav-link active" href="{{ url_for('dashboardAdmin') }}">
-                         DASHBOARD ADMINISTRADOR
+                         <h5>DASHBOARD ADMINISTRADOR</h5>
                       </a>
                    </li>
                    <li class="nav-item">
-                      <a class="nav-link" href="#">
-                         Administrar Materias
-                      </a>
+                         <h6 class="nav-link active" >Administrar Materias</h6>
                       <ul class="nav flex-column">
                         <li li class="" ><a class="nav-link" href="{{ url_for('adminMaterias') }}">
                            <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar materias</a></li>
-                        <li li class=""><a class="nav-link" href="#">
+                        <li li class=""><a class="nav-link" href="{{ url_for('adminActiv') }}">
                            <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar actividades</a></li>
-                        <li li class=""><a class="nav-link" href="#">
-                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar notas</a></li>
+                        <li li class=""><a class="nav-link" href="{{ url_for('califRetroalim') }}">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar calificaciones</a></li>
                         </ul>
                    </li>
                    <li class="nav-item">
-                      <a class="nav-link" href="#">
-                         Administrar Usuarios
-                      </a>
+                     <h6 class="nav-link active" >Administrar Usuarios</h6>
+                      <ul class="nav flex-column">
+                        <li li class="" ><a class="nav-link" href="{{ url_for('adminUsuario') }}">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar usuarios</a></li>
+                        <li li class=""><a class="nav-link" href="{{ url_for('adminDocente') }}">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar docentes</a></li>
+                        <li li class=""><a class="nav-link" href="{{ url_for('adminEstudiante') }}">
+                           <img src="https://img.icons8.com/material/24/000000/chevron-right--v1.png"/>Gestionar estudiantes</a></li>
+                        </ul>
                    </li>
                    <li class="nav-item">
-                      <a class="nav-link" href="#">
-                         Informacion Personal
+                      <a class="nav-link active" href="{{ url_for('infoAdmin') }}">
+                        <img src="https://img.icons8.com/material/24/4a90e2/info--v1.png"/>
+                        Informacion Personal
                       </a>
                    </li>
              </ul>

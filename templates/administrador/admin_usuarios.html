@@ -22,11 +22,7 @@
 {% endblock %}
 
 {% block contenido %}
-
-    <div class="container" style="padding-top: 5%;">
-        <img src="{{ url_for('static', filename='img/dash.jpg') }}" alt="Dashboard Administrador" >
-    </div>
-
+    {% include 'administrador/tablas_y_formularios/tbl_usuarios.html' %}
 {% endblock %}
 
 {% block Scripts %}

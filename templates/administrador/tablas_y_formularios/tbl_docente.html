@@ -1,0 +1,97 @@
+<!-- TABLA DOCENTE -->
+<div class="container" id="tabla-standart">
+    <h1>LISTADO Y ADMINISTRADOR DE DOCENTES</h1>
+
+    <h6>Filtrar por:</h6>
+
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Id o nombre del Docente" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar Docente</button>
+        </form>
+      </nav>
+      <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Id o nombre de Materia" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar Materia</button>
+        </form>
+      </nav>
+
+    <a class="navbar-brand" href="#" style="font-size: 18px;">Descargue listado de docentes</a>
+
+    <table class="table table-striped" style="margin-top:2%">
+        <thead>
+        <tr>                
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Id Docente</th>
+            <th scope="col">Docente</th>
+            <th scope="col">Id Materia</th>
+            <th scope="col">Materia Asignada</th>
+        </tr>
+        </thead>
+        <tbody id="datavendedor">
+            <tr>           
+                <th scope='row'>
+                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
+                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
+                <td>146546</td>
+                <td>Jose Perez</td>
+                <td>00012A</td>
+                <td>Geografia</td>
+            </tr>
+        </tbody>
+        <tbody id="datavendedor">
+            <tr>           
+                <th scope='row'>
+                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
+                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
+                <td>146546</td>
+                <td>Jhoanna Ruiz</td>
+                <td>001515A</td>
+                <td>Biologia</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="modalVendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Materia a Docente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>  
+                    <div class="form-group">
+                        <label for="id-docente" class="col-form-label">Id Docente:</label>
+                        <input title="" type="number" class="form-control" id="id-docente" >
+                    </div>                      
+                    <div class="form-group">
+                        <label for="nombre-docente" class="col-form-label">Nombre del Docente:</label>
+                        <input title="" type="text" class="form-control" id="nombre-docente" onchange="validar()" onfocus="validar()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id-actividad" class="col-form-label">Id Actividad:</label>
+                        <input type="number" class="form-control" id="id-actividad" onchange="validar()" onfocus="validar()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="actividad-nombre" class="col-form-label">Actividad:</label>
+                        <input type="text" class="form-control" id="actividad-nombre" onchange="validar()" onfocus="validar()">
+                    </div>                        
+
+                </form>
+            </div>
+            <div class="modal-footer">                    
+                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
+                <button id="btnModificar" type="button" class="btn btn-success" data-dismiss="modal" >Modificar</button>                  
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- END TABLA -->
