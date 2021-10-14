@@ -55,7 +55,7 @@ def infoAdmin():
     return render_template('administrador/info_admin.html')
 
 # ESTUDIANTE
-@app.route('/estudiante/materias/')
+@app.route('/estudiante')
 def estudianteMaterias():
     return render_template('estudiante/home_estudiante.html')
 
