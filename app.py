@@ -29,6 +29,6 @@ def dashboardAdmin():
 def adminMaterias():
     return render_template('administrador/materias.html')
 
-@app.route('/estudiante/materias/')
+@app.route('/estudiante')
 def estudianteMaterias():
-    return render_template('estudiante/main_estudiante.html')
+    return render_template('estudiante/home_estudiante.html')
