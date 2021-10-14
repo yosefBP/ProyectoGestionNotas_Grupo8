@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+    {% block extras %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+    crossorigin="anonymous">
+    {% endblock %}
+    {% block title %}
+    Retroalimentación Docente
+    {% endblock %}
+            <!-- CONTENT -->
+            {% block contenido %}
+            <h1>Docente</h1>
+            <h2>Retroalimentación Actividad y Notas</h2>
+            <!--Formulario-->
+            <br>
+            <form id="formRetroalimentacion" action="">
+                <!--Selectores-->
+                <div class="form-group">
+                    <label for="">ID Materia: </label>
+                    <select class="form-control" id ="selectorMateria">
+                        <option>Materia #1</option>
+                        <option>Materia #2</option>
+                        <option>Materia #3</option>
+                        <option>Materia #4</option>
+                        <!--Este atributo 'Materia' lo adicione porque creo que es necesario.-->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="selectorActividad">Actividad:  </label> <!--He notado que bootstrap utiliza un atributo for =""-->
+                    <select class="form-control" id="selectorActividad">
+                        <option>Actividad #1</option>
+                        <option>Actividad #2</option>
+                        <option>Actividad #3</option>
+                        <option>Actividad #4</option>
+                        <option>Actividad #5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">ID Estudiante:</label>
+                                                                        <!--from control CSS-Bootstrap -->
+                    <input type="text" placeholder="Ingrese ID Estudiante" class="form-control">   
+                </div>
+                <div class="form-group">
+                    <label for="">Retroalimentación: </label> 
+                    <textarea class="form-control" id="TextareaRetroalimentación" rows="4"></textarea>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="quantity">Nota (Entre 0 y 5):</label>
+                        <input type="number" id="quantity" name="quantity"  >
+
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-info">Enviar</button>
+                    </div>
+                </div>
+            </form>
+            {% endblock %}
+            <!-- END CONTENT -->
+<!--SCRIPTS-->
+{% block Scripts %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+{% endblock %}
+<!--END SCRIPTS-->
