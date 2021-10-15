@@ -64,7 +64,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>  
+                <form form class="form-signin" action="{{ url_for('adminMaterias') }}" method="POST" novalidate>  
                     <div class="form-group">
                         <label for="id-materia" class="col-form-label">Id Materia:</label>
                         <input title="" type="number" class="form-control" id="id-materia" >
