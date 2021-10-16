@@ -60,4 +60,7 @@ def infoAdmin():
 def estudianteMaterias():
     return render_template('estudiante/home_estudiante.html')
 
+@app.route('/estudiante/materia')
+def materiaActividades():
+    return render_template('estudiante/materia_actividades.html')
 # DOCENTE
