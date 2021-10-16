@@ -64,3 +64,12 @@ def estudianteMaterias():
 def materiaActividades():
     return render_template('estudiante/materia_actividades.html')
 # DOCENTE
+@app.route('/docente')
+def infoDocente():
+    return render_template('docente/home_docente.html')
+@app.route('/docente/registrarActividad')
+def registrarActividadDocente():
+    return render_template('docente/registrarActividad_docente.html')
+@app.route('/docente/retroalimentacion')
+def retroalimentacionDocente():
+    return render_template('docente/retroalimentacion_docente.html')

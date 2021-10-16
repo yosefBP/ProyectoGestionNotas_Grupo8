@@ -11,3 +11,21 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[validators.required()])
     checkbox = StringField(widget=CheckboxInput())
     submit = SubmitField()
+
+class UsuarioForm(FlaskForm):
+    pass
+
+class DocenteForm(FlaskForm):
+    pass
+
+class EstudianteForm(FlaskForm):
+    pass
+
+class MateriaForm(FlaskForm):
+    pass
+
+class ActividadesForm(FlaskForm):
+    pass
+
+class CalificacionesForm(FlaskForm):
+    pass

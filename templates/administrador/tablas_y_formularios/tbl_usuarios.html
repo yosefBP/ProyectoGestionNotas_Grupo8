@@ -33,6 +33,7 @@
             <th scope="col">Telefono</th>
             <th scope="col">Direccion</th>
             <th scope="col">Rol</th>
+            <th scope="col">Password</th>
         </tr>
         </thead>
         <tbody id="datavendedor">
@@ -47,6 +48,7 @@
                 <td>7894555</td>
                 <td>calle 15 30 98 apto 2 bloque 8</td>
                 <td>Docente</td>
+                <td>123gfgfcgf456</td>
             </tr>
         </tbody>
         <tbody id="datavendedor">
@@ -61,22 +63,10 @@
                 <td>7894555</td>
                 <td>calle 15 30 98 apto 2 bloque 8</td>
                 <td>Administrador</td>
+                <td>454644hgjh</td>
             </tr>
         </tbody>
-        <tbody id="datavendedor">
-            <tr>           
-                <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>1</td>
-                <td>Andrea</td>
-                <td>Rodriguez</td>
-                <td>andrea@gmail.com</td>
-                <td>7894555</td>
-                <td>calle 15 30 98 apto 2 bloque 8</td>
-                <td>Estudiante</td>
-            </tr>
-        </tbody>
+
     </table>
     <button type="button" class="btn"  style="background: #4eb3d2;color:white;border: 1px solid #fbd3df;" data-toggle="modal" data-target="#modalVendedor" onclick="Nuevo()">Crear usuario</button>
 
@@ -90,7 +80,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form form class="form-signin" action="{{ url_for('adminUsuario') }}" method="POST" novalidate>
                     <div class="form-group">
                         <label for="rol" class="col-form-label">Rol:</label>
                         <input title="" type="text" class="form-control" id="rol" >
@@ -123,12 +113,21 @@
                         <label for="address" class="col-form-label">Dirección:</label>
                         <input type="text" class="form-control" id="address" onchange="validar()" onfocus="validar()">
                     </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-form-label">Asignar password:</label>
+                        <input type="text" class="form-control" id="password" onchange="validar()" onfocus="validar()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirm_password" class="col-form-label">Confirmar password:</label>
+                        <input type="text" class="form-control" id="confirm_password" onchange="validar()" onfocus="validar()">
+                    </div>
                     
                 </form>
             </div>
             <div class="modal-footer">                    
-                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
-                <button id="btnModificar" type="button" class="btn btn-success" data-dismiss="modal" >Modificar</button>                  
+                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>                 
             </div>
         </div>
         </div>

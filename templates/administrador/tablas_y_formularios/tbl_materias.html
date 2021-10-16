@@ -64,7 +64,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>  
+                <form form class="form-signin" action="{{ url_for('adminMaterias') }}" method="POST" novalidate>  
                     <div class="form-group">
                         <label for="id-materia" class="col-form-label">Id Materia:</label>
                         <input title="" type="number" class="form-control" id="id-materia" >
@@ -77,8 +77,7 @@
                 </form>
             </div>
             <div class="modal-footer">                    
-                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>
-                <button id="btnModificar" type="button" class="btn btn-success" data-dismiss="modal" >Modificar</button>                  
+                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>                
             </div>
         </div>
         </div>
