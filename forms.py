@@ -2,9 +2,9 @@ from flask.templating import render_template
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
 from wtforms.fields.core import SelectField
-from wtforms.fields.html5 import EmailField, IntegerField, URLField
-from wtforms.fields.simple import SubmitField
-from wtforms.widgets.core import CheckboxInput, SubmitInput
+from wtforms.fields.html5 import EmailField, IntegerField, DecimalField
+from wtforms.fields.simple import SubmitField, TextAreaField
+from wtforms.widgets.core import CheckboxInput, SubmitInput, TextArea
 from wtforms import validators
 
 
@@ -12,53 +12,54 @@ class LoginForm(FlaskForm):
     e_mail = EmailField(validators=[validators.required()])
     password = PasswordField(validators=[validators.required()])
     checkbox = StringField(widget=CheckboxInput())
-    btnsubmit = SubmitField()
+    btnSubmit = SubmitField()
 
 class UsuarioForm(FlaskForm):
-    rol = SelectField(choices=[('', 'Elija un Rol'), ('0', 'Docente'), ('1', 'Estudiante'), ('2', 'Administrador')])
-    idUsuario = IntegerField(validators=[validators.required()])
-    nombreUsuario = StringField(validators=[validators.required()])
-    apellidoUsuario = StringField(validators=[validators.required()])
-    correoUsuario = EmailField(validators=[validators.required()])
-    telefonoUsuario = IntegerField(validators=[validators.required()])
-    direccionUsuario = StringField(validators=[validators.required()])
-    password = PasswordField(validators=[validators.required()])
-    confirmarPassword = PasswordField(validators=[validators.required()])
+    regexEmail = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    rol = SelectField('Rol', choices=[('', 'Elija un Rol'), ('0', 'Docente'), ('1', 'Estudiante'), ('2', 'Administrador')])
+    idUsuario = IntegerField('Id Usuario',validators=[validators.required()])
+    nombreUsuario = StringField('Nombre',validators=[validators.required()])
+    apellidoUsuario = StringField('Apellido',validators=[validators.required()])
+    correoUsuario = EmailField('E-mail',validators=[validators.required(), validators.Regexp(regexEmail)])
+    telefonoUsuario = IntegerField('Telefono',validators=[validators.required()])
+    direccionUsuario = StringField('Direccion',validators=[validators.required()])
+    password = StringField('Password',validators=[validators.required()])
+    confirmarPassword = StringField('Confirme el password',validators=[validators.required()])
     btnSubmit = SubmitField()
 
 class DocenteForm(FlaskForm):
-    idDocente = IntegerField(validators=[validators.required()])
-    nombreDocente = StringField(validators=[validators.required()])
-    idMateria = IntegerField(validators=[validators.required()])
-    nombreMateria = StringField(validators=[validators.required()])
+    idDocente = IntegerField('Id Docente', validators=[validators.required()])
+    nombreDocente = StringField('Nombre', validators=[validators.required()])
+    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    nombreMateria = StringField('Materia', validators=[validators.required()])
     btnSubmit = SubmitField()
 
 class EstudianteForm(FlaskForm):
-    idEstudiante = IntegerField(validators=[validators.required()])
-    nombreEstudiante = StringField(validators=[validators.required()])
-    idMateria = IntegerField(validators=[validators.required()])
-    nombreMateria = StringField(validators=[validators.required()])
+    idEstudiante = IntegerField('Id Estudiante', validators=[validators.required()])
+    nombreEstudiante = StringField('Nombre', validators=[validators.required()])
+    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    nombreMateria = StringField('Materia', validators=[validators.required()])
     btnSubmit = SubmitField()
 
 class MateriaForm(FlaskForm):
-    idMateria = IntegerField(validators=[validators.required()])
-    nombreMateria = StringField(validators=[validators.required()])
+    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    nombreMateria = StringField('Nombre', validators=[validators.required()])
     btnSubmit = SubmitField()
 
 class ActividadesForm(FlaskForm):
-    idMateria = IntegerField(validators=[validators.required()])
-    nombreMateria = StringField(validators=[validators.required()])
-    idActividad = IntegerField(validators=[validators.required()])
-    nombreActividad = StringField(validators=[validators.required()])
+    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    nombreMateria = StringField('Materia', validators=[validators.required()])
+    idActividad = IntegerField('Id Actividad', validators=[validators.required()])
+    nombreActividad = TextAreaField('Actividad', validators=[validators.required()])
     btnSubmit = SubmitField()
 
 class CalificacionesForm(FlaskForm):
-    idMateria = IntegerField(validators=[validators.required()])
-    nombreMateria = StringField(validators=[validators.required()])
-    idActividad = IntegerField(validators=[validators.required()])
-    nombreActividad = StringField(validators=[validators.required()])
-    idEstudinate = IntegerField(validators=[validators.required()])
-    nombreEstudiante = StringField(validators=[validators.required()])
-    calificacion = IntegerField(validators=[validators.required()])
-    retroalimentacion = StringField(validators=[validators.required()])
+    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    nombreMateria = StringField('Materia', validators=[validators.required()])
+    idActividad = IntegerField('Id Actividad', validators=[validators.required()])
+    nombreActividad = StringField('Actividad', validators=[validators.required()])
+    idEstudinate = IntegerField('Id Estudiante', validators=[validators.required()])
+    nombreEstudiante = StringField('Nombre del Estudiante', validators=[validators.required()])
+    calificacion = DecimalField('Calificacion',places=2, validators=[validators.required()])
+    retroalimentacion = StringField('Retroalimentacion', validators=[validators.required()])
     btnSubmit = SubmitField()

@@ -6,6 +6,7 @@ import yagmail as yag
 app = Flask(__name__)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
+mensajeError = "Error en el campo. Campo vacio o la informacion solicitada esta incorrecta."
 
 # LOGIN
 @app.route('/', methods=['GET','POST'])
@@ -23,7 +24,7 @@ def login():
             return '<h1>Failed</h1>'
 
 # ADMINISTRADOR
-@app.route('/administrador')
+@app.route('/administrador/')
 def dashboardAdmin():
     return render_template('administrador/home_admin.html')
 
@@ -121,6 +122,7 @@ def adminUsuario():
 
 @app.route('/adminsistrador/crear-usuarios', methods=['GET','POST'])
 def crearUsuario():
+    global mensajeError
     if request.method == 'GET':
         form = UsuarioForm()
         return render_template('administrador/formularios/form_crearUsuario.html', form=form)
@@ -129,10 +131,11 @@ def crearUsuario():
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminUsuario'))
         else:
-            return render_template('administrador/formularios/form_crearUsuario.html', form=formRequest)
+            return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError , form=formRequest)
 
 @app.route('/administrador/editar-usuarios', methods=['GET','POST'])
 def editarUsuario():
+    global mensajeError
     if request.method == 'GET':
         form = UsuarioForm()
         return render_template('administrador/formularios/form_editarUsuario.html', form=form)
@@ -141,7 +144,7 @@ def editarUsuario():
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminUsuario'))
         else:
-            return render_template('administrador/formularios/form_editarUsuario.html', form=formRequest)
+            return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR DOCENTES
 @app.route('/administrador/gestionar-docente')
