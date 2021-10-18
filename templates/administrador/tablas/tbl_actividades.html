@@ -1,0 +1,89 @@
+<!-- TABLA ACTIVIDADES -->
+<div class="container" id="tabla-standart">
+    <h1>LISTADO Y ADMINISTRADOR DE ACTIVIDADES</h1>
+
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Id o nombre de la materia" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+      </nav>
+
+    <a class="navbar-brand" href="#" style="font-size: 18px;">Descargue listado actividades</a>
+
+    <table class="table table-striped" style="margin-top:2%">
+        <thead>
+        <tr>                
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+            <th scope="col">Id Materia</th>
+            <th scope="col">Materia</th>
+            <th scope="col">Id Actividad</th>
+            <th scope="col">Actividad</th>
+        </tr>
+        </thead>
+        <tbody id="datavendedor">
+            <tr>           
+                <th scope='row'>
+                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
+                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
+                <td>00001A</td>
+                <td>Geografia</td>
+                <td>AG001</td>
+                <td>Ubicar las coordenadas dadas dentro de un mapa</td>
+            </tr>
+        </tbody>
+        <tbody id="datavendedor">
+            <tr>           
+                <th scope='row'>
+                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
+                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
+                <td>00001A</td>
+                <td>Geografia</td>
+                <td>AG001</td>
+                <td>Ubicar las coordenadas dadas dentro de un mapa</td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn"  style="background: #4eb3d2;color:white;border: 1px solid #fbd3df;" data-toggle="modal" data-target="#modalVendedor" onclick="Nuevo()">Crear Actividad</button>
+
+    <div class="modal fade" id="modalVendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Actividad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form form class="form-signin" action="{{ url_for('adminActiv') }}" method="POST" novalidate>  
+                    <div class="form-group">
+                        <label for="id-materia" class="col-form-label">Id Materia:</label>
+                        <input title="" type="number" class="form-control" id="id-materia" >
+                    </div>                      
+                    <div class="form-group">
+                        <label for="materia" class="col-form-label">Nombre de la Materia:</label>
+                        <input title="" type="text" class="form-control" id="materia" onchange="validar()" onfocus="validar()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id-actividad" class="col-form-label">Id Actividad:</label>
+                        <input type="number" class="form-control" id="id-actividad" onchange="validar()" onfocus="validar()">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="actividad" class="col-form-label">Actividad:</label>
+                        <input type="text" class="form-control" id="actividad" onchange="validar()" onfocus="validar()">
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">                    
+                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>                 
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- END TABLA -->
