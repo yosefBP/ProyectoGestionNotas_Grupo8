@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block extras %}
+    <!-- Sweetalert--> 
+    <link data-require="sweet-alert@*" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
+    <!-- Otros links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <!-- Other CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
+{% endblock %}
+
+{% block title %}
+    Editar calificación
+{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top: 1.5%; display: flex; justify-content: space-around;" >
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+          <h2 class="card-title">EDITAR CALIFICACION Y RETROALIMENTACION</h2>
+          <form action="{{ url_for('editCalifRetroalim') }}" method="POST" novalidate>
+            {{ form.csrf_token }}
+              <div class="form-group">
+                  <label for="id-materia" class="col-form-label">Id Materia:</label>
+                  <input title="" type="number" class="form-control" id="id-materia" >
+              </div>                      
+              <div class="form-group">
+                  <label for="nombre-materia" class="col-form-label">Nombre de la Materia:</label>
+                  <input title="" type="text" class="form-control" id="nombre-materia">
+              </div>
+          
+              <div class="form-group">
+                  <label for="id-actividad" class="col-form-label">Id Actividad:</label>
+                  <input type="number" class="form-control" id="id-actividad">
+              </div>
+          
+              <div class="form-group">
+                  <label for="actividad" class="col-form-label">Actividad:</label>
+                  <input type="text" class="form-control" id="actividad">
+              </div>                        
+          
+              <div class="form-group">
+                  <label for="id-estudiante" class="col-form-label">Id Estudiante:</label>
+                  <input type="number" class="form-control" id="id-estudiante" onchange="validar()" onfocus="validar()">
+              </div>
+          
+              <div class="form-group">
+                  <label for="nombre-estudiante" class="col-form-label">Nombre del Estudiante:</label>
+                  <input type="text" class="form-control" id="nombre-estudiante" onchange="validar()" onfocus="validar()">
+              </div>
+          
+              <div class="form-group">
+                  <label for="calificacion" class="col-form-label">Calificacion:</label>
+                  <input type="number" class="form-control" id="calificacion" onchange="validar()" onfocus="validar()">
+              </div>
+          
+              <div class="form-group">
+                  <label for="retroalimentacion" class="col-form-label">Retroalimentacion:</label>
+                  <input type="text" class="form-control" id="retroalimentacion" onchange="validar()" onfocus="validar()">
+              </div>
+              {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
+          </form>
+        </div> 
+    </div>
+</div>
+
+{% endblock %}
