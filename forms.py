@@ -1,5 +1,7 @@
+from flask.templating import render_template
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField
+from wtforms.fields.core import SelectField
 from wtforms.fields.html5 import EmailField, URLField
 from wtforms.fields.simple import SubmitField
 from wtforms.widgets.core import CheckboxInput, SubmitInput
@@ -10,22 +12,23 @@ class LoginForm(FlaskForm):
     e_mail = EmailField(validators=[validators.required()])
     password = PasswordField(validators=[validators.required()])
     checkbox = StringField(widget=CheckboxInput())
-    submit = SubmitField()
+    btnsubmit = SubmitField()
 
 class UsuarioForm(FlaskForm):
-    pass
+    rol = SelectField(choices=[('', 'Elija un Rol'), ('0', 'Docente'), ('1', 'Estudiante'), ('2', 'Administrador')])
+    btnSubmit = SubmitField()
 
 class DocenteForm(FlaskForm):
-    pass
+    btnSubmit = SubmitField()
 
 class EstudianteForm(FlaskForm):
-    pass
+    btnSubmit = SubmitField()
 
 class MateriaForm(FlaskForm):
-    pass
+    btnSubmit = SubmitField()
 
 class ActividadesForm(FlaskForm):
-    pass
+    btnSubmit = SubmitField()
 
 class CalificacionesForm(FlaskForm):
-    pass
+    btnSubmit = SubmitField()
