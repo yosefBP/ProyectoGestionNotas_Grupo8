@@ -33,13 +33,12 @@
             <th scope="col">Telefono</th>
             <th scope="col">Direccion</th>
             <th scope="col">Rol</th>
-            <th scope="col">Password</th>
         </tr>
         </thead>
         <tbody id="datavendedor">
             <tr>           
                 <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
+                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarUsuario')}}" role="button">EDITAR</a></th>
                 <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
                 <td>1</td>
                 <td>Jose</td>
@@ -48,89 +47,9 @@
                 <td>7894555</td>
                 <td>calle 15 30 98 apto 2 bloque 8</td>
                 <td>Docente</td>
-                <td>123gfgfcgf456</td>
             </tr>
         </tbody>
-        <tbody id="datavendedor">
-            <tr>           
-                <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>1</td>
-                <td>Pedro</td>
-                <td>Robles</td>
-                <td>pedro@gmail.com</td>
-                <td>7894555</td>
-                <td>calle 15 30 98 apto 2 bloque 8</td>
-                <td>Administrador</td>
-                <td>454644hgjh</td>
-            </tr>
-        </tbody>
-
     </table>
-    <button type="button" class="btn"  style="background: #4eb3d2;color:white;border: 1px solid #fbd3df;" data-toggle="modal" data-target="#modalVendedor" onclick="Nuevo()">Crear usuario</button>
-
-    <div class="modal fade" id="modalVendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear Usuario</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form form class="form-signin" action="{{ url_for('adminUsuario') }}" method="POST" novalidate>
-                    <div class="form-group">
-                        <label for="rol" class="col-form-label">Rol:</label>
-                        <input title="" type="text" class="form-control" id="rol" >
-                    </div> 
-                    <div class="form-group">
-                        <label for="id-usuario" class="col-form-label">Id usuario:</label>
-                        <input title="" type="text" class="form-control" id="id-usuario" >
-                    </div>                      
-                    <div class="form-group">
-                        <label for="firstname" class="col-form-label">Nombre:</label>
-                        <input title="El nombre no puede superar 15 caracteres" type="text" class="form-control" id="firstname" onchange="validar()" onfocus="validar()">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lastname" class="col-form-label">Apellido:</label>
-                        <input type="text" class="form-control" id="lastname" onchange="validar()" onfocus="validar()">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email" class="col-form-label">Email:</label>
-                        <input type="text" class="form-control" id="email" onchange="validar()" onfocus="validar()">
-                    </div>                        
-
-                    <div class="form-group">
-                        <label for="telephone" class="col-form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="telephone" onchange="validar()" onfocus="validar()">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address" class="col-form-label">Dirección:</label>
-                        <input type="text" class="form-control" id="address" onchange="validar()" onfocus="validar()">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-form-label">Asignar password:</label>
-                        <input type="text" class="form-control" id="password" onchange="validar()" onfocus="validar()">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="confirm_password" class="col-form-label">Confirmar password:</label>
-                        <input type="text" class="form-control" id="confirm_password" onchange="validar()" onfocus="validar()">
-                    </div>
-                    
-                </form>
-            </div>
-            <div class="modal-footer">                    
-                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>                 
-            </div>
-        </div>
-        </div>
-    </div>
+    <a id="btnCalificar" class="btn btn-primary" href="{{url_for('crearUsuario')}}" role="button">Crear Usuario</a>
 </div>
 <!-- END TABLA -->

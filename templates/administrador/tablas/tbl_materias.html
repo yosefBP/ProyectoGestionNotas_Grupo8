@@ -18,69 +18,13 @@
         <tbody id="datavendedor">
             <tr>           
                 <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>00001A</td>
-                <td>Geografia</td>
-            </tr>
-        </tbody>
-        <tbody id="datavendedor">
-            <tr>           
-                <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>00001A</td>
-                <td>Geografia</td>
-            </tr>
-        </tbody>
-        <tbody id="datavendedor">
-            <tr>           
-                <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>00001A</td>
-                <td>Geografia</td>
-            </tr>
-        </tbody>
-        <tbody id="datavendedor">
-            <tr>           
-                <th scope='row'>
-                <button type='button' class='btn btn-success' data-toggle='modal' data-target='#modalVendedor' >EDITAR</button></th>
+                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarMateria')}}" role="button">EDITAR</a></th>
                 <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
                 <td>00001A</td>
                 <td>Geografia</td>
             </tr>
         </tbody>
     </table>
-    <button type="button" class="btn"  style="background: #4eb3d2;color:white;border: 1px solid #fbd3df;" data-toggle="modal" data-target="#modalVendedor" onclick="Nuevo()">Crear Materia</button>
-
-    <div class="modal fade" id="modalVendedor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Crear Materia</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form form class="form-signin" action="{{ url_for('adminMaterias') }}" method="POST" novalidate>  
-                    <div class="form-group">
-                        <label for="id-materia" class="col-form-label">Id Materia:</label>
-                        <input title="" type="number" class="form-control" id="id-materia" >
-                    </div>                      
-                    <div class="form-group">
-                        <label for="nombre-materia" class="col-form-label">Nombre de la Materia:</label>
-                        <input title="" type="text" class="form-control" id="nombre-materia" onchange="validar()" onfocus="validar()">
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">                    
-                <button id="btnGuardar" type="button" class="btn btn-primary" data-dismiss="modal" >Guardar</button>                
-            </div>
-        </div>
-        </div>
-    </div>
+    <a id="btnCalificar" class="btn btn-primary" href="{{url_for('crearMateria')}}" role="button">Crear Materia</a>
 </div>
 <!-- END TABLA -->
