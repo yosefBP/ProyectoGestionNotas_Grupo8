@@ -9,7 +9,8 @@ from wtforms import validators
 
 
 class LoginForm(FlaskForm):
-    e_mail = EmailField(validators=[validators.required()])
+    regexEmail = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    e_mail = EmailField(validators=[validators.required(), validators.Regexp(regexEmail)])
     password = PasswordField(validators=[validators.required()])
     checkbox = StringField(widget=CheckboxInput())
     btnSubmit = SubmitField()

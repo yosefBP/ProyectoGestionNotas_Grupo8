@@ -19,7 +19,13 @@
                 {{ form.csrf_token }}
 
                 {{ form.e_mail(placeholder='Correo', class='form-control', autofocus=True) }}
+                {% if form.e_mail.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
                 {{ form.password(placeholder='Contraseña', class='form-control') }}
+                {% if form.password.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
                 
                 <div id="remember" class="checkbox">
                     <label>

@@ -11,17 +11,26 @@ mensajeError = "Error en el campo. Campo vacio o la informacion solicitada esta 
 # LOGIN
 @app.route('/', methods=['GET','POST'])
 def login():
+    global mensajeError
+    mensajeError1 = "Error. Campo vacio o el Usuario es invalido."
+    mensajeError2 = "Error. Campo vacio o el Password es invalido."
+    mensajeError3 = "Error. Campo vacio."
     if request.method == 'GET':
         loginSession = LoginForm()
         return render_template('login.html', form=loginSession)
     else:
         formRequest = LoginForm(request.form)
-        if formRequest.validate_on_submit() == True and formRequest.e_mail.data == 'yosef@gmail.com' :
-            return dashboardAdmin()
-        elif formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() == True:
             return '<h1>Success</h1>'
         else:
-            return '<h1>Failed</h1>'
+            if formRequest.e_mail.data == "" and formRequest.password.data == "":
+                return render_template('login.html', form=formRequest, mensajeError=mensajeError3)
+            elif formRequest.e_mail.data == "" and formRequest.password.data != "":
+                return render_template('login.html', form=formRequest, mensajeError=mensajeError1)
+            elif formRequest.password.data == "" and formRequest.e_mail.data != "":
+                return render_template('login.html', mensajeError=mensajeError2, form=formRequest)
+            else:
+                return render_template('login.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR
 @app.route('/administrador/')
@@ -35,27 +44,29 @@ def adminMaterias():
 
 @app.route('/administrador/crear-materia', methods=['GET','POST'])
 def crearMateria():
+    global mensajeError
     if request.method == 'GET':
         form = MateriaForm()
-        return render_template('administrador/formularios/form_crearMateria.html', form=form)
+        return render_template('administrador/formularios/form_crearMateria.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = MateriaForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminMaterias'))
         else:
-            return render_template('administrador/formularios/form_crearMateria.html', form=formRequest)
+            return render_template('administrador/formularios/form_crearMateria.html', mensajeError=mensajeError, form=formRequest)
 
 @app.route('/administrador/editar-materia', methods=['GET','POST'])
 def editarMateria():
+    global mensajeError
     if request.method == 'GET':
         form = MateriaForm()
-        return render_template('administrador/formularios/form_editarMateria.html', form=form)
+        return render_template('administrador/formularios/form_editarMateria.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = MateriaForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminMaterias'))
         else:
-            return render_template('administrador/formularios/form_editarMateria.html', form=formRequest)
+            return render_template('administrador/formularios/form_editarMateria.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR ACTIVIDADES
 @app.route('/administrador/gestionar-actividades')
@@ -64,27 +75,29 @@ def adminActiv():
 
 @app.route('/administrar/crear-actividad', methods=['GET','POST'])
 def crearActiv():
+    global mensajeError
     if request.method == 'GET':
         form = ActividadesForm()
-        return render_template('administrador/formularios/form_crearActividad.html', form=form)
+        return render_template('administrador/formularios/form_crearActividad.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = ActividadesForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminActiv'))
         else:
-            return render_template('administrador/formularios/form_crearActividad.html', form=formRequest)
+            return render_template('administrador/formularios/form_crearActividad.html', mensajeError=mensajeError, form=formRequest)
 
 @app.route('/administrar/editar-actividad', methods=['GET','POST'])
 def editarActiv():
+    global mensajeError
     if request.method == 'GET':
         form = ActividadesForm()
-        return render_template('administrador/formularios/form_editarActividad.html', form=form)
+        return render_template('administrador/formularios/form_editarActividad.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = ActividadesForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminActiv'))
         else:
-            return render_template('administrador/formularios/form_editarActividad.html', form=formRequest)
+            return render_template('administrador/formularios/form_editarActividad.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR CALIFICACIONES
 @app.route('/administrador/calificaciones-y-retroalimentaciones')
@@ -93,27 +106,29 @@ def indexCalificacion():
 
 @app.route('/administrador/calificar', methods=['GET','POST'])
 def califRetroalim():
+    global mensajeError
     if request.method == 'GET':
         form = CalificacionesForm()
-        return render_template('administrador/formularios/form_calificar.html', form=form)
+        return render_template('administrador/formularios/form_calificar.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = CalificacionesForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('indexCalificacion'))
         else:
-            return render_template('administrador/formularios/form_calificar.html', form=formRequest)
+            return render_template('administrador/formularios/form_calificar.html', mensajeError=mensajeError, form=formRequest)
 
 @app.route('/administrador/editar-calificacion', methods=['GET','POST'])
 def editCalifRetroalim():
+    global mensajeError
     if request.method == 'GET':
         form = CalificacionesForm()
-        return render_template('administrador/formularios/form_editarCalificacion.html', form=form)
+        return render_template('administrador/formularios/form_editarCalificacion.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = CalificacionesForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('indexCalificacion'))
         else:
-            return render_template('administrador/formularios/form_editarCalificacion.html', form=formRequest)
+            return render_template('administrador/formularios/form_editarCalificacion.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR USUARIOS
 @app.route('/administrador/gestionar-usuarios')
@@ -125,10 +140,10 @@ def crearUsuario():
     global mensajeError
     if request.method == 'GET':
         form = UsuarioForm()
-        return render_template('administrador/formularios/form_crearUsuario.html', form=form)
+        return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() == True and formRequest.rol.data != 'Seleccione un rol':
             return redirect(url_for('adminUsuario'))
         else:
             return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError , form=formRequest)
@@ -138,10 +153,10 @@ def editarUsuario():
     global mensajeError
     if request.method == 'GET':
         form = UsuarioForm()
-        return render_template('administrador/formularios/form_editarUsuario.html', form=form)
+        return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() == True and formRequest.rol.data != 'Seleccione un rol':
             return redirect(url_for('adminUsuario'))
         else:
             return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
@@ -153,15 +168,16 @@ def adminDocente():
 
 @app.route('/administrador/editar-docente', methods=['GET','POST'])
 def editarDocente():
+    global mensajeError
     if request.method == 'GET':
         form = DocenteForm()
-        return render_template('administrador/formularios/form_editarDocente.html', form=form)
+        return render_template('administrador/formularios/form_editarDocente.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = DocenteForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminDocente'))
         else:
-            return render_template('administrador/formularios/form_editarDocente.html', form=formRequest)
+            return render_template('administrador/formularios/form_editarDocente.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR ESTUDIANTES
 @app.route('/administrador/gestionar-estudiante')
@@ -170,15 +186,16 @@ def adminEstudiante():
 
 @app.route('/administrador/editar-estudiante', methods=['GET','POST'])
 def editarEstudiante():
+    global mensajeError
     if request.method == 'GET':
         form = EstudianteForm()
-        return render_template('administrador/formularios/form_editarEstudiante.html', form=form)
+        return render_template('administrador/formularios/form_editarEstudiante.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = EstudianteForm(request.form)
         if formRequest.validate_on_submit() == True:
             return redirect(url_for('adminEstudiante'))
         else:
-            return render_template('administrador/formularios/form_editarEstudiante.html', form=formRequest)
+            return render_template('administrador/formularios/form_editarEstudiante.html', mensajeError=mensajeError, form=formRequest)
 
 # ADMINISTRADOR INFORMACION PERSONAL
 @app.route('/administrador/informacion-personal')
