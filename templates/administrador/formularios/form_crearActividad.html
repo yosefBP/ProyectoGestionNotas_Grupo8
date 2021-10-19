@@ -25,22 +25,34 @@
             <form form class="form-signin" action="{{ url_for('crearActiv') }}" method="POST" novalidate>
                 {{ form.csrf_token }} 
                 <div class="form-group">
-                    <label for="id-materia" class="col-form-label">Id Materia:</label>
-                    <input title="" type="number" class="form-control" id="id-materia" >
+                    {{ form.idMateria.label }}
+                    {{ form.idMateria(class="form-control", style="font-size: 14px;")}}
+                    {% if form.idMateria.errors %}
+                    <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                    {% endif %}
                 </div>                      
                 <div class="form-group">
-                    <label for="materia" class="col-form-label">Nombre de la Materia:</label>
-                    <input title="" type="text" class="form-control" id="materia">
+                    {{ form.nombreMateria.label }}
+                    {{ form.nombreMateria(class="form-control", style="font-size: 14px;")}}
+                    {% if form.nombreMateria.errors %}
+                    <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                    {% endif %}
                 </div>
             
                 <div class="form-group">
-                    <label for="id-actividad" class="col-form-label">Id Actividad:</label>
-                    <input type="number" class="form-control" id="id-actividad" >
+                    {{ form.idActividad.label }}
+                    {{ form.idActividad(class="form-control", style="font-size: 14px;")}}
+                    {% if form.idActividad.errors %}
+                    <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                    {% endif %}
                 </div>
             
                 <div class="form-group">
-                    <label for="actividad" class="col-form-label">Actividad:</label>
-                    <input type="text" class="form-control" id="actividad" >
+                    {{ form.nombreActividad.label }}
+                    {{ form.nombreActividad(class="form-control", style="font-size: 14px;")}}
+                    {% if form.nombreActividad.errors %}
+                    <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                    {% endif %}
                 </div>
                 {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
             </form>

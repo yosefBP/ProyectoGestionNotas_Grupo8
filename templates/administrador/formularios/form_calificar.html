@@ -25,42 +25,66 @@
           <form action="{{ url_for('califRetroalim') }}" method="POST" novalidate>
             {{ form.csrf_token }}
               <div class="form-group">
-                  <label for="id-materia" class="col-form-label">Id Materia:</label>
-                  <input title="" type="number" class="form-control" id="id-materia" >
+                {{ form.idMateria.label }}
+                {{ form.idMateria(class="form-control", style="font-size: 14px;")}}
+                {% if form.idMateria.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>                      
               <div class="form-group">
-                  <label for="nombre-materia" class="col-form-label">Nombre de la Materia:</label>
-                  <input title="" type="text" class="form-control" id="nombre-materia" onchange="validar()" onfocus="validar()">
+                {{ form.nombreMateria.label }}
+                {{ form.nombreMateria(class="form-control", style="font-size: 14px;")}}
+                {% if form.nombreMateria.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>
           
               <div class="form-group">
-                  <label for="id-actividad" class="col-form-label">Id Actividad:</label>
-                  <input type="number" class="form-control" id="id-actividad" onchange="validar()" onfocus="validar()">
+                {{ form.idActividad.label }}
+                {{ form.idActividad(class="form-control", style="font-size: 14px;")}}
+                {% if form.idActividad.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>
           
               <div class="form-group">
-                  <label for="actividad" class="col-form-label">Actividad:</label>
-                  <input type="text" class="form-control" id="actividad">
+                {{ form.nombreActividad.label }}
+                {{ form.nombreActividad(class="form-control", style="font-size: 14px;")}}
+                {% if form.nombreActividad.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>                        
           
               <div class="form-group">
-                  <label for="id-estudiante" class="col-form-label">Id Estudiante:</label>
-                  <input type="number" class="form-control" id="id-estudiante" >
+                {{ form.idEstudiante.label }}
+                {{ form.idEstudiante(class="form-control", style="font-size: 14px;")}}
+                {% if form.idEstudiante.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>
           
               <div class="form-group">
-                  <label for="nombre-estudiante" class="col-form-label">Nombre del Estudiante:</label>
-                  <input type="text" class="form-control" id="nombre-estudiante">
+                {{ form.nombreEstudiante.label }}
+                {{ form.nombreEstudiante(class="form-control", style="font-size: 14px;")}}
+                {% if form.nombreEstudiante.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>
           
               <div class="form-group">
-                  <label for="calificacion" class="col-form-label">Calificacion:</label>
-                  <input type="number" class="form-control" id="calificacion">
+                {{ form.calificacion.label }}
+                {{ form.calificacion(class="form-control", style="font-size: 14px;")}}
+                {% if form.calificacion.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>
           
               <div class="form-group">
-                  <label for="retroalimentacion" class="col-form-label">Retroalimentacion:</label>
-                  <input type="text" class="form-control" id="retroalimentacion" >
+                {{ form.retroalimentacion.label }}
+                {{ form.retroalimentacion(class="form-control", style="font-size: 14px;")}}
+                {% if form.retroalimentacion.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
               </div>
               {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
           </form>

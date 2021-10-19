@@ -25,22 +25,34 @@
           <form form class="form-signin" action="{{ url_for('editarDocente') }}" method="POST" novalidate> 
             {{ form.csrf_token }} 
             <div class="form-group">
-                <label for="id-docente" class="col-form-label">Id Docente:</label>
-                <input title="" type="number" class="form-control" id="id-docente" >
+                {{ form.idDocente.label }}
+                {{ form.idDocente(class="form-control", style="font-size: 14px;")}}
+                {% if form.idDocente.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
             </div>                      
             <div class="form-group">
-                <label for="nombre-docente" class="col-form-label">Nombre del Docente:</label>
-                <input title="" type="text" class="form-control" id="nombre-docente" >
+                {{ form.nombreDocente.label }}
+                {{ form.nombreDocente(class="form-control", style="font-size: 14px;")}}
+                {% if form.nombreDocente.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
             </div>
 
             <div class="form-group">
-                <label for="id-actividad" class="col-form-label">Id Actividad:</label>
-                <input type="number" class="form-control" id="id-actividad" >
+                {{ form.idMateria.label }}
+                {{ form.idMateria(class="form-control", style="font-size: 14px;")}}
+                {% if form.idMateria.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
             </div>
 
             <div class="form-group">
-                <label for="actividad-nombre" class="col-form-label">Actividad:</label>
-                <input type="text" class="form-control" id="actividad-nombre">
+                {{ form.nombreMateria.label }}
+                {{ form.nombreMateria(class="form-control", style="font-size: 14px;")}}
+                {% if form.nombreMateria.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
             </div>
                 {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
             </form>
