@@ -210,6 +210,11 @@ def estudianteMaterias():
 @app.route('/estudiante/materia')
 def materiaActividades():
     return render_template('estudiante/materia_actividades.html')
+
+@app.route('/estudiante/perfil')
+def estudianteInfoPersonal():
+    return render_template('estudiante/info_estudiante.html')
+
 # DOCENTE
 @app.route('/docente')
 def infoDocente():

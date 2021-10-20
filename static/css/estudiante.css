@@ -2,3 +2,9 @@
     background-color: rgb(61, 99, 172)!important;
 }
 
+.list-group-item{
+    border-radius: 10px !important;
+    background-color:#dcdcdc;
+    margin-bottom: 1rem;
+}
+

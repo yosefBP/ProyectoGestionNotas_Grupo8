@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block extras %}
+<!-- Other CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/estudiante.css') }}">
+{% endblock %}
+
+{% block title %}
+Materia id_materia
+{% endblock %}
+
+{% block contenido %}
+<main class="container">
+    <div class="row m-4">
+        <div class="col text-center">
+            <img src="{{url_for('static', filename='img/thunk.png')}}" class="img-fluid rounded-circle align-content-center" style="max-width: 18%;" alt="Imagen de perfil">
+        </div>
+    </div>
+    <div class="row m-4 justify-content-center pt-5">
+        <div class="col-md-6">
+            <ul class="list-group font-weight-bold">
+                <label for="">Nombres</label>
+                <li class="list-group-item"></li>
+                <label for="">Correo electrónico</label>
+                <li class="list-group-item"></li>
+                <label for="">Promedio</label>
+                <li class="list-group-item"></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul class="list-group font-weight-bold">
+                <label for="">Apellidos</label>
+                <li class="list-group-item"></li>
+                <label for="">ID Estudiante</label>
+                <li class="list-group-item"></li>
+                <label for="">Total materias</label>
+                <li class="list-group-item"></li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+{% endblock %}
