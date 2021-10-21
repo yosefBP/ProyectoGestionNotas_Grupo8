@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block title %}
-Materia id_materia
+    Nombre estudiante
+{% endblock %}
+
+{% block menu %}
+    {% include 'estudiante/menu_estudiante.html' %}
 {% endblock %}
 
 {% block contenido %}
@@ -22,21 +26,21 @@ Materia id_materia
         <div class="col-md-6">
             <ul class="list-group font-weight-bold">
                 <label for="">Nombres</label>
-                <li class="list-group-item"></li>
+                <li id="campo_info" class="list-group-item"></li>
                 <label for="">Correo electrónico</label>
-                <li class="list-group-item"></li>
+                <li id="campo_info" class="list-group-item"></li>
                 <label for="">Promedio</label>
-                <li class="list-group-item"></li>
+                <li id="campo_info" class="list-group-item"></li>
             </ul>
         </div>
         <div class="col-md-6">
             <ul class="list-group font-weight-bold">
                 <label for="">Apellidos</label>
-                <li class="list-group-item"></li>
-                <label for="">ID Estudiante</label>
-                <li class="list-group-item"></li>
+                <li id="campo_info" class="list-group-item"></li>
+                <label for="">Código estudiante</label>
+                <li id="campo_info" class="list-group-item"></li>
                 <label for="">Total materias</label>
-                <li class="list-group-item"></li>
+                <li id="campo_info" class="list-group-item"></li>
             </ul>
         </div>
     </div>

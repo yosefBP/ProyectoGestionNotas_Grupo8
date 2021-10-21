@@ -11,6 +11,10 @@
 Materia id_materia
 {% endblock %}
 
+{% block menu %}
+    {% include 'estudiante/menu_estudiante.html' %}
+{% endblock %}
+
 {% block contenido %}
 <main class="container">
     <div class="row">
@@ -19,7 +23,7 @@ Materia id_materia
 
         <div class="col-12 col-lg-3 align-self-center">
             <div class="card text-white bg-custom m-5" style="width: 12rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{{url_for('static', filename='img/thunk.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Materia N</h5>
                     <p class="card-text">Código materia</p>
@@ -31,13 +35,13 @@ Materia id_materia
 
         <!-- Lista actividades -->
 
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-8 align-self-center">
             <ul class="list-group list-group-horizontal align-content-center m-3">
                 <li class="list-group-item font-weight-bold bg-custom text-white">Titulo Actividad</li>
                 <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
                     eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
                     magni vitae, velit earum ea excepturi dolor culpa.</li>
-                <li class="list-group-item font-weight-bold">
+                <li class="list-group-item font-weight-bold d-flex align-items-center">
                     <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
                 </li>
             </ul>
@@ -46,7 +50,7 @@ Materia id_materia
                 <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
                     eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
                     magni vitae, velit earum ea excepturi dolor culpa.</li>
-                <li class="list-group-item font-weight-bold">
+                <li class="list-group-item font-weight-bold d-flex align-items-center">
                     <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
                 </li>
             </ul>
@@ -55,7 +59,7 @@ Materia id_materia
                 <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
                     eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
                     magni vitae, velit earum ea excepturi dolor culpa.</li>
-                <li class="list-group-item font-weight-bold">
+                <li class="list-group-item font-weight-bold d-flex align-items-center">
                     <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
                 </li>
             </ul>
