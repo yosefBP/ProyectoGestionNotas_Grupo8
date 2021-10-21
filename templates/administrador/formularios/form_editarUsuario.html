@@ -26,9 +26,9 @@
                  {{ form.csrf_token }}
 
                  <div class="form-group">
-                    {{ form.rol.label }}
-                    {{ form.rol(class="custom-select", style="font-size: 14px;")}}
-                    {% if form.rol.errors %}
+                    {{ form.rol_id.label }}
+                    {{ form.rol_id(class="custom-select", style="font-size: 14px;")}}
+                    {% if form.rol_id.errors %}
                     <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                     {% endif %}
                  </div> 
@@ -96,7 +96,8 @@
                     <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                     {% endif %}
                    </div>
-                      {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
+                   {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
+                   <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('adminUsuario')}}" role="button">Cancelar</a>
             </form>
         </div>             
     </div>

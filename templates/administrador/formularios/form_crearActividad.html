@@ -54,7 +54,8 @@
                     <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                     {% endif %}
                 </div>
-                {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
+                {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
+                <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('adminActiv')}}" role="button">Cancelar</a>
             </form>
         </div>              
     </div>

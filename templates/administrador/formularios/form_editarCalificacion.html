@@ -24,7 +24,7 @@
           <h2 class="card-title">EDITAR CALIFICACION Y RETROALIMENTACION</h2>
           <form action="{{ url_for('editCalifRetroalim') }}" method="POST" novalidate>
             {{ form.csrf_token }}
-            <div class="form-group">
+              <div class="form-group">
                 {{ form.idMateria.label }}
                 {{ form.idMateria(class="form-control", style="font-size: 14px;")}}
                 {% if form.idMateria.errors %}
@@ -86,7 +86,8 @@
                 <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                 {% endif %}
               </div>
-              {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary btn-block') }}
+              {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
+              <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('indexCalificacion')}}" role="button">Cancelar</a>
           </form>
         </div> 
     </div>
