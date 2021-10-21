@@ -171,7 +171,7 @@ def editarUsuario():
         else:
             return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
 
-@app.route('/administrador/gestionar-usuarios<idUsuario>')
+@app.route('/administrador/gestionar-usuarios/eliminar-usuario<idUsuario>')
 def eliminarUsuario(idUsuario):
     usuario = Usuarios.get_by_id(idUsuario)
     usuario.eliminarUsuario()
