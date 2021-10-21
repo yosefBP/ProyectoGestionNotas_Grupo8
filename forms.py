@@ -59,7 +59,7 @@ class CalificacionesForm(FlaskForm):
     nombreMateria = StringField('Materia', validators=[validators.required()])
     idActividad = IntegerField('Id Actividad', validators=[validators.required()])
     nombreActividad = StringField('Actividad', validators=[validators.required()])
-    idEstudinate = IntegerField('Id Estudiante', validators=[validators.required()])
+    idEstudiante = IntegerField('Id Estudiante', validators=[validators.required()])
     nombreEstudiante = StringField('Nombre del Estudiante', validators=[validators.required()])
     calificacion = DecimalField('Calificacion',places=2, validators=[validators.required()])
     retroalimentacion = StringField('Retroalimentacion', validators=[validators.required()])
