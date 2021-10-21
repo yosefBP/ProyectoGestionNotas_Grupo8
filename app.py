@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from forms import *
+from modelos.classModels import Usuarios
 import os
 import yagmail as yag
 
@@ -133,6 +134,9 @@ def editCalifRetroalim():
 # ADMINISTRADOR USUARIOS
 @app.route('/administrador/gestionar-usuarios')
 def adminUsuario():
+    listaUsuarios = Usuarios.get_all()
+    if listaUsuarios:
+        return render_template('administrador/admin_usuarios.html', listaUsuarios=listaUsuarios)
     return render_template('administrador/admin_usuarios.html')
 
 @app.route('/adminsistrador/crear-usuarios', methods=['GET','POST'])
@@ -143,7 +147,13 @@ def crearUsuario():
         return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True and formRequest.rol.data != 'Seleccione un rol':
+        if formRequest.validate_on_submit() == True and formRequest.rol_id.data != 'Seleccione un rol' \
+            and formRequest.password.data == formRequest.confirmarPassword.data:
+
+            nuevoUsuario = Usuarios(formRequest.idUsuario.data, formRequest.nombreUsuario.data, formRequest.apellidoUsuario.data, 
+            formRequest.correoUsuario.data, formRequest.telefonoUsuario.data, formRequest.direccionUsuario.data, formRequest.password.data, int(formRequest.rol_id.data))
+
+            nuevoUsuario.insertarUsuario()
             return redirect(url_for('adminUsuario'))
         else:
             return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError , form=formRequest)
@@ -160,6 +170,13 @@ def editarUsuario():
             return redirect(url_for('adminUsuario'))
         else:
             return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
+
+@app.route('/administrador/gestionar-usuarios<idUsuario>')
+def eliminarUsuario(idUsuario):
+    usuario = Usuarios.get_by_id(idUsuario)
+    usuario.eliminarUsuario()
+
+    return redirect(url_for('adminUsuario'))
 
 # ADMINISTRADOR DOCENTES
 @app.route('/administrador/gestionar-docente')

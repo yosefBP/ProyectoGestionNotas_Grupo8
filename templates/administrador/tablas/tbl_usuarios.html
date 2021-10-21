@@ -36,18 +36,32 @@
         </tr>
         </thead>
         <tbody id="datavendedor">
+
+          {% if listaUsuarios %}
+            {% for item in listaUsuarios %}
+          
             <tr>           
                 <th scope='row'>
                     <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarUsuario')}}" role="button">EDITAR</a></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>1</td>
-                <td>Jose</td>
-                <td>Perez</td>
-                <td>jose@gmail.com</td>
-                <td>7894555</td>
-                <td>calle 15 30 98 apto 2 bloque 8</td>
-                <td>Docente</td>
+                <td><a id="btnCalificar" class="btn btn-danger" href="{{url_for('eliminarUsuario', idUsuario=item.idUsuario )}}" role="button">ELIMINAR</a></td>   
+                <td>{{ item.idUsuario }}</td>
+                <td>{{ item.nombreUsuario }}</td>
+                <td>{{ item.apellidoUsuario }}</td>
+                <td>{{ item.correoUsuario }}</td>
+                <td>{{ item.telefonoUsuario }}</td>
+                <td>{{ item.direccionUsuario }}</td>
+                {% if item.rol_id == 1 %}
+                  <td>Docente</td>
+                  {% endif %}
+                {% if item.rol_id == 2 %}
+                  <td>Estudiante</td>
+                {% endif %}
+                {% if item.rol_id == 3 %}
+                  <td>Administardor</td>
+                {% endif %}
             </tr>
+            {% endfor %}
+          {% endif %}
         </tbody>
     </table>
     <a id="btnCalificar" class="btn btn-primary" href="{{url_for('crearUsuario')}}" role="button">Crear Usuario</a>
