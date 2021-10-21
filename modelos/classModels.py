@@ -40,7 +40,7 @@ class Usuarios():
         return (numFilas > 0)
 
     def eliminarUsuario(self):
-        sql = "DELETE Usuarios WHERE idUsuario = ?"
+        sql = "DELETE FROM Usuarios WHERE idUsuario = ?"
         afectadas = bm.insertDb(sql, [self.idUsuario])
         return (afectadas >0)
 

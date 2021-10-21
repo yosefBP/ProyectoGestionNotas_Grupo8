@@ -16,6 +16,7 @@ def insertDb(_sql, args):
         conexion = conectarDb()
         if conexion:
             cursorObjeto = conexion.cursor()
+
             numFilas = cursorObjeto.execute(_sql, args).rowcount
             cursorObjeto.close()
             conexion.commit()
