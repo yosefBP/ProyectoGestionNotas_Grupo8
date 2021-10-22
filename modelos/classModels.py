@@ -39,6 +39,11 @@ class Usuarios():
 
         return (numFilas > 0)
 
+    def actualizarUsuario(self):
+        sql = "UPDATE Usuarios SET nombreUsuario = ?, apellidoUsuario = ?, correoUsuario = ?, telefonoUsuario = ?, direccionUsuario = ?, password = ?, rol_id = ? WHERE idUsuario = ?"
+        afectadas = bm.insertDb(sql, [self.nombreUsuario, self.apellidoUsuario, self.correoUsuario, self.telefonoUsuario, self.direccionUsuario, self.password, self.rol_id, self.idUsuario])
+        return (afectadas >0)
+
     def eliminarUsuario(self):
         sql = "DELETE FROM Usuarios WHERE idUsuario = ?"
         afectadas = bm.insertDb(sql, [self.idUsuario])

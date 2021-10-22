@@ -22,15 +22,19 @@
     <div class="card" style="width: 50rem;">
         <div class="card-body">
           <h2 class="card-title">CREAR USUARIO</h2>
+
+          {% if ErrorValidacion %}
+          <div class="form-group">
+             <span style="font-size: 14px; color: red;">{{ ErrorValidacion }}</span>
+          </div>
+          {% endif %}
+
           <form action="{{ url_for('crearUsuario') }}" method="POST" novalidate>
              {{ form.csrf_token }}
 
              <div class="form-group">
                 {{ form.rol_id.label }}
                 {{ form.rol_id(class="custom-select", style="font-size: 14px;")}}
-                {% if form.rol_id.errors %}
-                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
-                {% endif %}
              </div> 
 
              <div class="form-group">
@@ -95,9 +99,10 @@
                 {% if form.confirmarPassword.errors %}
                 <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                 {% endif %}
-               </div>
-                  {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
-                  <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('adminUsuario')}}" role="button">Cancelar</a>
+             </div>
+
+             {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
+             <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('adminUsuario')}}" role="button">Cancelar</a>
         </form>
       </div>             
   </div>

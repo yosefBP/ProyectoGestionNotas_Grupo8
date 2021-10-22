@@ -17,7 +17,7 @@ class LoginForm(FlaskForm):
 
 class UsuarioForm(FlaskForm):
     regexEmail = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    rol_id = SelectField('Rol', choices=[('', 'Elija un Rol'), ('1', 'Docente'), ('2', 'Estudiante'), ('3', 'Administrador')])
+    rol_id = SelectField('Rol', choices=[('', 'Seleccione un Rol'), ('1', 'Docente'), ('2', 'Estudiante'), ('3', 'Administrador')])
     idUsuario = IntegerField('Id Usuario',validators=[validators.required()])
     nombreUsuario = StringField('Nombre',validators=[validators.required()])
     apellidoUsuario = StringField('Apellido',validators=[validators.required()])

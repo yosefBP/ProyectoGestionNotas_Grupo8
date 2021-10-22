@@ -22,20 +22,24 @@
     <div class="card" style="width: 50rem;">
         <div class="card-body">
           <h2 class="card-title">EDITAR USUARIO</h2>
-            <form action="{{ url_for('editarUsuario') }}" method="POST" novalidate>
+
+          {% if ErrorValidacion %}
+          <div class="form-group">
+             <span style="font-size: 14px; color: red;">{{ ErrorValidacion }}</span>
+          </div>
+          {% endif %}
+
+            <form action="{{ url_for('editarUsuario', idUsuario=form.idUsuario) }}" method="POST" novalidate>
                  {{ form.csrf_token }}
 
                  <div class="form-group">
                     {{ form.rol_id.label }}
-                    {{ form.rol_id(class="custom-select", style="font-size: 14px;")}}
-                    {% if form.rol_id.errors %}
-                    <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
-                    {% endif %}
-                 </div> 
-    
+                    {{ form.rol_id(class="custom-select", style="font-size: 14px;") }}
+                 </div>
+
                  <div class="form-group">
                     {{ form.idUsuario.label }}
-                    {{ form.idUsuario(class="form-control", style="font-size: 14px;")}}
+                    {{ form.idUsuario(class="form-control", style="font-size: 14px;") }}
                     {% if form.idUsuario.errors %}
                     <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                     {% endif %}
@@ -91,13 +95,14 @@
     
                  <div class="form-group">
                     {{ form.confirmarPassword.label }}
-                    {{ form.confirmarPassword(class="form-control", style="font-size: 14px;")}}
+                    {{ form.confirmarPassword(class="form-control", style="font-size: 14px;") }}
                     {% if form.confirmarPassword.errors %}
                     <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                     {% endif %}
-                   </div>
-                   {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
-                   <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('adminUsuario')}}" role="button">Cancelar</a>
+                 </div>
+
+                 {{ form.btnSubmit(value='Guardar', class='btn btn-lg btn-primary') }}
+                 <a id="btnCalificar" class="btn btn-lg btn-danger" href="{{url_for('adminUsuario')}}" role="button">Cancelar</a>
             </form>
         </div>             
     </div>

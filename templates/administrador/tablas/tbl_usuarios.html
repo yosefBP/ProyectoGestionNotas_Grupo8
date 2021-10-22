@@ -17,8 +17,7 @@
         </form>
       </nav>
 
-    <a class="navbar-brand" href="#" style="font-size: 18px;">Descargue listado de usuarios         
-
+    <a class="navbar-brand" href="#" style="font-size: 18px;">Descargue listado de usuarios
     </a>
 
     <table class="table table-striped" style="margin-top:2%">
@@ -42,7 +41,7 @@
           
             <tr>           
                 <th scope='row'>
-                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarUsuario')}}" role="button">EDITAR</a></th>
+                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarUsuario', idUsuario=item.idUsuario)}}" role="button">EDITAR</a></th>
                 <td><a id="btnCalificar" class="btn btn-danger" href="{{url_for('eliminarUsuario', idUsuario=item.idUsuario )}}" role="button">ELIMINAR</a></td>   
                 <td>{{ item.idUsuario }}</td>
                 <td>{{ item.nombreUsuario }}</td>

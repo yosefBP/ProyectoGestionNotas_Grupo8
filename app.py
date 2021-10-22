@@ -5,8 +5,8 @@ import os
 import yagmail as yag
 
 app = Flask(__name__)
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+#SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = "86272a371c5acfb485b4701c837b922ab6d99134ad679002c36ebb136ad18412" #SECRET_KEY
 mensajeError = "Error en el campo. Campo vacio o la informacion solicitada esta incorrecta."
 
 # LOGIN
@@ -142,13 +142,22 @@ def adminUsuario():
 @app.route('/adminsistrador/crear-usuarios', methods=['GET','POST'])
 def crearUsuario():
     global mensajeError
+    errorValidacion = ''
+
     if request.method == 'GET':
         form = UsuarioForm()
         return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True and formRequest.rol_id.data != 'Seleccione un rol' \
-            and formRequest.password.data == formRequest.confirmarPassword.data:
+        if formRequest.validate_on_submit() == True :
+            if formRequest.rol_id.data == '' :
+                errorValidacion = 'Seleccione un Rol'
+                return render_template('administrador/formularios/form_crearUsuario.html', 
+                ErrorValidacion=errorValidacion, form=formRequest)
+            if formRequest.password.data != formRequest.confirmarPassword.data:
+                errorValidacion = 'Las contraseñas no coinciden'
+                return render_template('administrador/formularios/form_crearUsuario.html', 
+                ErrorValidacion=errorValidacion, form=formRequest)
 
             nuevoUsuario = Usuarios(formRequest.idUsuario.data, formRequest.nombreUsuario.data, formRequest.apellidoUsuario.data, 
             formRequest.correoUsuario.data, formRequest.telefonoUsuario.data, formRequest.direccionUsuario.data, formRequest.password.data, int(formRequest.rol_id.data))
@@ -158,15 +167,49 @@ def crearUsuario():
         else:
             return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError , form=formRequest)
 
-@app.route('/administrador/editar-usuarios', methods=['GET','POST'])
-def editarUsuario():
+@app.route('/administrador/editar-usuario<idUsuario>', methods=['GET','POST'])
+def editarUsuario(idUsuario):
     global mensajeError
+    errorValidacion = ''
+
     if request.method == 'GET':
         form = UsuarioForm()
+        usuario = Usuarios.get_by_id(idUsuario)
+        form.idUsuario.data = usuario.idUsuario
+        form.nombreUsuario.data = usuario.nombreUsuario
+        form.apellidoUsuario.data = usuario.apellidoUsuario
+        form.correoUsuario.data = usuario.correoUsuario
+        form.telefonoUsuario.data = usuario.telefonoUsuario
+        form.direccionUsuario.data = usuario.direccionUsuario
+        form.password.data = usuario.password
+        form.confirmarPassword.data = usuario.password
+        form.rol_id.data = str(usuario.rol_id)
+
         return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True and formRequest.rol.data != 'Seleccione un rol':
+        if formRequest.validate_on_submit() == True :
+            if formRequest.rol_id.data == '' :
+                errorValidacion = 'Seleccione un Rol'
+                return render_template('administrador/formularios/form_editarUsuario.html', 
+                ErrorValidacion=errorValidacion, form=formRequest)
+            if formRequest.password.data != formRequest.confirmarPassword.data:
+                errorValidacion = 'Las contraseñas no coinciden'
+                return render_template('administrador/formularios/form_editarUsuario.html', 
+                ErrorValidacion=errorValidacion, form=formRequest)
+
+            usuario = Usuarios(
+            idUsuario = formRequest.idUsuario.data,
+            nombreUsuario = formRequest.nombreUsuario.data,
+            apellidoUsuario = formRequest.apellidoUsuario.data,
+            correoUsuario = formRequest.correoUsuario.data,
+            telefonoUsuario = formRequest.telefonoUsuario.data,
+            direccionUsuario = formRequest.direccionUsuario.data,
+            password = formRequest.password.data,
+            rol_id = int(formRequest.rol_id.data)
+            )
+
+            usuario.actualizarUsuario()
             return redirect(url_for('adminUsuario'))
         else:
             return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
