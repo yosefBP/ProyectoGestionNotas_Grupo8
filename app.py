@@ -15,7 +15,7 @@ app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 # LOGIN
 @app.route('/', methods=['GET','POST'])
-def login():
+def index():
     global mensajeError
     mensajeError1 = "Error. Campo vacio o el Usuario es invalido."
     mensajeError2 = "Error. Campo vacio o el Password es invalido."
