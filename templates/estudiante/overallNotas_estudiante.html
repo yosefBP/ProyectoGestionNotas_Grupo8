@@ -32,22 +32,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for n in num_materias %}
                         <tr>
                             <td class="font-weight-bolder">Nombre materia</td>
                             <td class="text-center">Nombre profesor</td>
-                            <td class="table-success">--</td>
+                            {% for nota in notas %}
+                                {% if nota >= 4.2 %}
+                                    <td class="table-success align-self-center">{{nota}}</td>
+                                    {% break %}                                                 
+                                {% elif nota > 3.0 and not nota > 4.2%}
+                                    <td class="table-warning align-self-center">{{nota}}</td>
+                                    {% break %}                                             
+                                {% else %}
+                                    <td class="table-danger align-self-center">{{nota}}</td>
+                                    {% break %}                            
+                                {% endif %}                            
+                            {% endfor %}
                         </tr>
-                        <tr>
-                            <td class="font-weight-bolder">Nombre materia</td>
-                            <td class="text-center">Nombre profesor</td>
-                            <td class="table-warning">--</td>
-                        </tr>
-                        <tr>
-                            <td class="font-weight-bolder">Nombre materia</td>
-                            <td class="text-center">Nombre profesor</td>
-                            <td class="table-danger">--</td>
-                        </tr>
-
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

@@ -3,11 +3,15 @@ from forms import *
 from modelos.classModels import Usuarios
 import os
 import yagmail as yag
+from jinja2 import Environment
+from jinja2.ext import LoopControlExtension
 
 app = Flask(__name__)
 #SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = "86272a371c5acfb485b4701c837b922ab6d99134ad679002c36ebb136ad18412" #SECRET_KEY
 mensajeError = "Error en el campo. Campo vacio o la informacion solicitada esta incorrecta."
+
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 # LOGIN
 @app.route('/', methods=['GET','POST'])
@@ -269,15 +273,20 @@ def estudianteMaterias():
 
 @app.route('/estudiante/materia')
 def materiaActividades():
-    return render_template('estudiante/materia_actividades.html')
+    id_materia = "id materia"
+    num_actividades = [0,0,0,0]
+    return render_template('estudiante/materia_actividades.html', id_materia = id_materia, num_actividades = num_actividades)
 
 @app.route('/estudiante/perfil')
 def estudianteInfoPersonal():
-    return render_template('estudiante/info_estudiante.html')
+    nom_estudiante = "Pepito"
+    return render_template('estudiante/info_estudiante.html', nom_estudiante = nom_estudiante )
 
 @app.route('/estudiante/resumenNotas')
 def estudianteNotasOverall():
-    return render_template('estudiante/overallNotas_estudiante.html')
+    num_materias = [0,0,0,0]
+    notas = [2.5, 4.7, 3.8, 2]
+    return render_template('estudiante/overallNotas_estudiante.html', num_materias = num_materias, notas = notas,)
 
 # DOCENTE
 @app.route('/docente')

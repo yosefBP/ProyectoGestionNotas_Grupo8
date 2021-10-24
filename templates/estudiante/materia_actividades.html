@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-Materia id_materia
+    Materia {{id_materia}}
 {% endblock %}
 
 {% block menu %}
@@ -35,34 +35,18 @@ Materia id_materia
 
         <!-- Lista actividades -->
 
-        <div class="col-12 col-lg-8 align-self-center">
-            <ul class="list-group list-group-horizontal align-content-center m-3">
-                <li class="list-group-item font-weight-bold bg-custom text-white">Titulo Actividad</li>
-                <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
-                    eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
-                    magni vitae, velit earum ea excepturi dolor culpa.</li>
-                <li class="list-group-item font-weight-bold d-flex align-items-center">
-                    <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
-                </li>
-            </ul>
-            <ul class="list-group list-group-horizontal align-content-center m-3">
-                <li class="list-group-item font-weight-bold bg-custom text-white">Titulo Actividad</li>
-                <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
-                    eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
-                    magni vitae, velit earum ea excepturi dolor culpa.</li>
-                <li class="list-group-item font-weight-bold d-flex align-items-center">
-                    <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
-                </li>
-            </ul>
-            <ul class="list-group list-group-horizontal align-content-center m-3">
-                <li class="list-group-item font-weight-bold bg-custom text-white">Titulo Actividad</li>
-                <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
-                    eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
-                    magni vitae, velit earum ea excepturi dolor culpa.</li>
-                <li class="list-group-item font-weight-bold d-flex align-items-center">
-                    <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
-                </li>
-            </ul>
+        <div class="col-12 col-lg-8 pt-4 align-self-center">
+            {% for n in num_actividades %}
+                <ul class="list-group list-group-horizontal align-content-center m-3">
+                    <li class="list-group-item font-weight-bold bg-custom text-white">Titulo Actividad</li>
+                    <li class="list-group-item bg-custom text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam blanditiis
+                        eaque, autem praesentium quidem magnam nemo laboriosam necessitatibus ex possimus sint eveniet,
+                        magni vitae, velit earum ea excepturi dolor culpa.</li>
+                    <li class="list-group-item font-weight-bold d-flex align-items-center">
+                        <span class="badge bg-primary rounded-pill text-white">Nota: N</span>
+                    </li>
+                </ul>
+            {% endfor %}
         </div>
     </div>
 </main>
