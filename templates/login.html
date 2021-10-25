@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.ico') }}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
     <title>Login</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -12,7 +13,9 @@
 </head>
 <body>
     <div class="container">
+
         <div class="card card-container" id="form-login">
+            <h3>Gestor de Notas</h3>
             <img id="profile-img" class="profile-img-card" src="{{url_for('static', filename='img/logo.jpg')}}"/>
             <p id="profile-name" class="profile-name-card"></p>
             <form class="form-signin" action="{{ url_for('login') }}" method="POST" novalidate>
@@ -35,6 +38,11 @@
                 {{ form.btnSubmit(value='Ingresar', class='btn btn-lg btn-primary btn-block btn-signin') }}
             </form>
             <br>
+            {% if ErrorValidacion %}
+            <div class="form-group">
+               <span style="font-size: 14px; color: red;">{{ ErrorValidacion }}</span>
+            </div>
+            {% endif %}
             <a href="#" class="forgot-password">
                 ¿Ha olvidado su contraseña?
             </a>
