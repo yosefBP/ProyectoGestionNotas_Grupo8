@@ -63,7 +63,7 @@ class Usuarios():
 
         if getRow and len(getRow) == 1:
             if check_password_hash(getRow[0]['password'], password):
-                return ['True', getRow[0]['rol_id']]
+                return ['True', getRow[0]['rol_id'], getRow[0]['idUsuario']]
 
         return ['False']
 

@@ -3,10 +3,20 @@
        <img src="{{ url_for('static', filename='img/logo.jpg') }}" id="icon-logo">
     </div>
     <div id="sesion">
-       <span>Rol</span>
+      {% if g.user %}
+         {% if g.user.rol_id == 1 %}
+            <span>Docente</span>
+            {% endif %}
+         {% if g.user.rol_id == 2 %}
+            <span>Estudiante</span>
+            {% endif %}
+         {% if g.user.rol_id == 3 %}
+            <span>Administrador</span>
+            {% endif %}
        <img src="https://img.icons8.com/material/24/000000/user--v1.png" class="icon-header"/>
-       <span>Nombre usuario</span>
-       <a href="{{ url_for('login') }}"><img src="https://img.icons8.com/material/24/000000/shutdown--v1.png"  class="icon-header"/></a>
+           <span>{{ g.user.nombreUsuario }}</span>
+       {% endif %}
+       <a href="{{ url_for('logout') }}"><img src="https://img.icons8.com/material/24/000000/shutdown--v1.png"  class="icon-header"/></a>
     </div>
   </div>
   

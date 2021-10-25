@@ -21,7 +21,7 @@
             <form class="form-signin" action="{{ url_for('login') }}" method="POST" novalidate>
                 {{ form.csrf_token }}
 
-                {{ form.e_mail(placeholder='Correo', class='form-control', autofocus=True) }}
+                {{ form.e_mail(placeholder='Correo electronico', class='form-control', autofocus=True) }}
                 {% if form.e_mail.errors %}
                 <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
                 {% endif %}

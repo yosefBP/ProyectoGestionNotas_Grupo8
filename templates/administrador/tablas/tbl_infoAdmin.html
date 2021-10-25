@@ -5,35 +5,35 @@
           <h5 class="card-title">Informacion Personal</h5>
         <div class="form-group">
             <label for="Rol" class="col-form-label">Rol:</label>
-            <input title="" type="text" class="form-control" id="Rol" readonly>
+            <input title="" type="text" class="form-control" id="Rol" value="Administrador" readonly>
         </div>   
         <div class="form-group">
             <label for="Id" class="col-form-label">Id:</label>
-            <input title="" type="text" class="form-control" id="Id" readonly>
+            <input title="" type="text" class="form-control" id="Id" value={{ g.user.idUsuario }} readonly>
         </div>                      
         <div class="form-group">
             <label for="firstname" class="col-form-label">Nombre:</label>
-            <input title="" type="text" class="form-control" id="firstname" readonly> 
+            <input title="" type="text" class="form-control" id="firstname" value={{ g.user.nombreUsuario }} readonly> 
         </div>
 
         <div class="form-group">
             <label for="lastname" class="col-form-label">Apellido:</label>
-            <input type="text" class="form-control" id="lastname" readonly>
+            <input type="text" class="form-control" id="lastname" value={{ g.user.apellidoUsuario }} readonly>
         </div>
 
         <div class="form-group">
             <label for="email" class="col-form-label">Email:</label>
-            <input type="text" class="form-control" id="email" readonly>
+            <input type="text" class="form-control" id="email" value={{ g.user.correoUsuario }} readonly>
         </div>                        
 
         <div class="form-group">
             <label for="telephone" class="col-form-label">Telefono:</label>
-            <input type="text" class="form-control" id="telephone" readonly>
+            <input type="text" class="form-control" id="telephone" value={{ g.user.telefonoUsuario }} readonly>
         </div>
 
         <div class="form-group">
             <label for="address" class="col-form-label">Dirección:</label>
-            <input type="text" class="form-control" id="address" readonly>
+            <input type="text" class="form-control" id="address" value={{ g.user.direccionUsuario }} readonly>
         </div>
         </div>
     </div>
