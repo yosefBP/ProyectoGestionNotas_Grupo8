@@ -73,6 +73,7 @@ background-image: url(../img/campus.jpg);
 
 #form-login {
     border-radius: 10px;
+    text-align: center;
 }
 
 .form-signin #inputEmail,
