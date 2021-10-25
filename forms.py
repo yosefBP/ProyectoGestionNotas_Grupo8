@@ -25,7 +25,7 @@ class UsuarioForm(FlaskForm):
     telefonoUsuario = IntegerField('Telefono',validators=[validators.required()])
     direccionUsuario = StringField('Direccion',validators=[validators.required()])
     password = StringField('Password',validators=[validators.required()])
-    confirmarPassword = StringField('Confirme el password',validators=[validators.required()])
+    confirmarPassword = StringField('Confirme el Password',validators=[validators.required()])
     btnSubmit = SubmitField()
 
 class DocenteForm(FlaskForm):

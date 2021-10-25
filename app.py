@@ -7,32 +7,40 @@ import yagmail as yag
 app = Flask(__name__)
 #SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = "86272a371c5acfb485b4701c837b922ab6d99134ad679002c36ebb136ad18412" #SECRET_KEY
-mensajeError = "Error en el campo. Campo vacio o la informacion solicitada esta incorrecta."
+mensajeError = "Error: Campo vacio o la informacion solicitada esta incorrecta."
 
 
 # LOGIN
 @app.route('/', methods=['GET','POST'])
 def login():
     global mensajeError
-    mensajeError1 = "Error. Campo vacio o el Usuario es invalido."
-    mensajeError2 = "Error. Campo vacio o el Password es invalido."
-    mensajeError3 = "Error. Campo vacio."
+    errorValidacion = "Error: Password o Usuario invalido."
+    errorValidacion2 = "Error: Pasword no cumple con criterios de seguridad."
+    mensajeError2 = "Error: Campo vacio."
     if request.method == 'GET':
         loginSession = LoginForm()
         return render_template('login.html', form=loginSession)
     else:
         formRequest = LoginForm(request.form)
         if formRequest.validate_on_submit() == True:
-            return '<h1>Success</h1>'
+            usuarioLogin = Usuarios.verificarUsuario(formRequest.e_mail.data, formRequest.password.data)
+            if Usuarios.charValidatorPassword(formRequest.password.data) == True:
+                return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion2)
+            if usuarioLogin[0] == 'True':
+                if usuarioLogin[1] == 1:
+                    return redirect(url_for('infoDocente'))
+                elif usuarioLogin[1] == 2:
+                    return redirect(url_for('estudianteMaterias'))
+                elif usuarioLogin[1] == 3:
+                    return redirect(url_for('dashboardAdmin'))
+            else:
+                return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion)
         else:
             if formRequest.e_mail.data == "" and formRequest.password.data == "":
-                return render_template('login.html', form=formRequest, mensajeError=mensajeError3)
-            elif formRequest.e_mail.data == "" and formRequest.password.data != "":
-                return render_template('login.html', form=formRequest, mensajeError=mensajeError1)
+                return render_template('login.html', form=formRequest, mensajeError=mensajeError2)
             elif formRequest.password.data == "" and formRequest.e_mail.data != "":
-                return render_template('login.html', mensajeError=mensajeError2, form=formRequest)
-            else:
                 return render_template('login.html', mensajeError=mensajeError, form=formRequest)
+
 
 # ADMINISTRADOR
 @app.route('/administrador/')
@@ -182,8 +190,8 @@ def editarUsuario(idUsuario):
         form.correoUsuario.data = usuario.correoUsuario
         form.telefonoUsuario.data = usuario.telefonoUsuario
         form.direccionUsuario.data = usuario.direccionUsuario
-        form.password.data = usuario.password
-        form.confirmarPassword.data = usuario.password
+        form.password.data = ""
+        form.confirmarPassword.data = ""
         form.rol_id.data = str(usuario.rol_id)
 
         return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=form)
@@ -207,6 +215,22 @@ def editarUsuario(idUsuario):
             telefonoUsuario = formRequest.telefonoUsuario.data,
             direccionUsuario = formRequest.direccionUsuario.data,
             password = formRequest.password.data,
+            rol_id = int(formRequest.rol_id.data)
+            )
+
+            usuario.actualizarUsuario()
+            return redirect(url_for('adminUsuario'))
+        elif formRequest.password.data == "" and formRequest.confirmarPassword.data == "":
+            usuarioPassword = Usuarios.get_by_id(formRequest.idUsuario.data)
+
+            usuario = Usuarios(
+            idUsuario = formRequest.idUsuario.data,
+            nombreUsuario = formRequest.nombreUsuario.data,
+            apellidoUsuario = formRequest.apellidoUsuario.data,
+            correoUsuario = formRequest.correoUsuario.data,
+            telefonoUsuario = formRequest.telefonoUsuario.data,
+            direccionUsuario = formRequest.direccionUsuario.data,
+            password = usuarioPassword.password,
             rol_id = int(formRequest.rol_id.data)
             )
 
