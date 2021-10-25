@@ -3,15 +3,12 @@ from forms import *
 from modelos.classModels import Usuarios
 import os
 import yagmail as yag
-from jinja2 import Environment
-from jinja2.ext import LoopControlExtension
 
 app = Flask(__name__)
 #SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = "86272a371c5acfb485b4701c837b922ab6d99134ad679002c36ebb136ad18412" #SECRET_KEY
 mensajeError = "Error en el campo. Campo vacio o la informacion solicitada esta incorrecta."
 
-app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
 # LOGIN
 @app.route('/', methods=['GET','POST'])
