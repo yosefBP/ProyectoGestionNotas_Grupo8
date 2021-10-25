@@ -14,18 +14,18 @@ mensajeError = "Error: Campo vacio o la informacion solicitada esta incorrecta."
 @app.route('/', methods=['GET','POST'])
 def login():
     global mensajeError
-    errorValidacion = "Error: Password o Usuario invalido."
+    errorValidacion1 = "Error: Password o Usuario invalido."
     errorValidacion2 = "Error: Pasword no cumple con criterios de seguridad."
-    mensajeError2 = "Error: Campo vacio."
+
     if request.method == 'GET':
         loginSession = LoginForm()
         return render_template('login.html', form=loginSession)
     else:
         formRequest = LoginForm(request.form)
         if formRequest.validate_on_submit() == True:
-            usuarioLogin = Usuarios.verificarUsuario(formRequest.e_mail.data, formRequest.password.data)
             if Usuarios.charValidatorPassword(formRequest.password.data) == True:
                 return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion2)
+            usuarioLogin = Usuarios.verificarUsuario(formRequest.e_mail.data, formRequest.password.data)
             if usuarioLogin[0] == 'True':
                 if usuarioLogin[1] == 1:
                     return redirect(url_for('infoDocente'))
@@ -34,12 +34,9 @@ def login():
                 elif usuarioLogin[1] == 3:
                     return redirect(url_for('dashboardAdmin'))
             else:
-                return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion)
+                return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion1)
         else:
-            if formRequest.e_mail.data == "" and formRequest.password.data == "":
-                return render_template('login.html', form=formRequest, mensajeError=mensajeError2)
-            elif formRequest.password.data == "" and formRequest.e_mail.data != "":
-                return render_template('login.html', mensajeError=mensajeError, form=formRequest)
+            return render_template('login.html', mensajeError=mensajeError, form=formRequest)
 
 
 # ADMINISTRADOR
