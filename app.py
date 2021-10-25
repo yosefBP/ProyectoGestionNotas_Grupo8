@@ -284,9 +284,10 @@ def estudianteInfoPersonal():
 
 @app.route('/estudiante/resumenNotas')
 def estudianteNotasOverall():
-    num_materias = [0,0,0,0]
+    materias = ['Matemáticas','Biología','Inglés','Física']
+    docentes = ['Carlos', 'Juan', 'Laura', 'Vanesa']
     notas = [2.5, 4.7, 3.8, 2]
-    return render_template('estudiante/overallNotas_estudiante.html', num_materias = num_materias, notas = notas,)
+    return render_template('estudiante/overallNotas_estudiante.html', materias = materias, notas = notas, docentes = docentes)
 
 # DOCENTE
 @app.route('/docente')
