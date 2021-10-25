@@ -314,7 +314,6 @@ def editarUsuario(idUsuario):
              Ingresa a: {3}".format(formRequest.nombreUsuario.data, formRequest.correoUsuario.data, formRequest.password.data, 'https://gestor-de-notas.herokuapp.com/'))
             return redirect(url_for('adminUsuario'))
         elif formRequest.password.data == "" and formRequest.confirmarPassword.data == "":
-            usuarioPassword = Usuarios.get_by_id(formRequest.idUsuario.data)
 
             usuario = Usuarios(
             idUsuario = formRequest.idUsuario.data,
@@ -323,7 +322,7 @@ def editarUsuario(idUsuario):
             correoUsuario = formRequest.correoUsuario.data,
             telefonoUsuario = formRequest.telefonoUsuario.data,
             direccionUsuario = formRequest.direccionUsuario.data,
-            password = usuarioPassword.password,
+            password = "",
             rol_id = int(formRequest.rol_id.data)
             )
 

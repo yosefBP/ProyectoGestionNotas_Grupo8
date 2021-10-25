@@ -43,6 +43,11 @@ class Usuarios():
         return (numFilas > 0)
 
     def actualizarUsuario(self):
+        if self.password == "":
+            sql = "UPDATE Usuarios SET nombreUsuario = ?, apellidoUsuario = ?, correoUsuario = ?, telefonoUsuario = ?, direccionUsuario = ?, rol_id = ? WHERE idUsuario = ?"
+            afectadas = bm.insertDb(sql, [self.nombreUsuario, self.apellidoUsuario, self.correoUsuario, self.telefonoUsuario, self.direccionUsuario, self.rol_id, self.idUsuario])
+            return (afectadas >0)
+
         hashed_pwd = generate_password_hash(self.password, method='pbkdf2:sha256',salt_length=32)
         sql = "UPDATE Usuarios SET nombreUsuario = ?, apellidoUsuario = ?, correoUsuario = ?, telefonoUsuario = ?, direccionUsuario = ?, password = ?, rol_id = ? WHERE idUsuario = ?"
         afectadas = bm.insertDb(sql, [self.nombreUsuario, self.apellidoUsuario, self.correoUsuario, self.telefonoUsuario, self.direccionUsuario, hashed_pwd, self.rol_id, self.idUsuario])
