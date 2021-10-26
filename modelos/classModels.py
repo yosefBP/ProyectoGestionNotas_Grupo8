@@ -1,6 +1,5 @@
-# sql statement handler class
+#!/usr/bin/python3
 
-from re import split
 import modelos.base_models as bm
 from typing import Any
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -15,8 +14,10 @@ class Usuarios():
     direccionUsuario = Any
     password = Any
     rol_id  = Any
+    politicaPrivacidad = Any
 
-    def __init__(self, idUsuario, nombreUsuario, apellidoUsuario, correoUsuario, telefonoUsuario, direccionUsuario, password, rol_id ):
+
+    def __init__(self, idUsuario, nombreUsuario, apellidoUsuario, correoUsuario, telefonoUsuario, direccionUsuario, password, rol_id, politicaPrivacidad='N' ):
         self.idUsuario = idUsuario
         self.nombreUsuario = nombreUsuario
         self.apellidoUsuario = apellidoUsuario
@@ -25,6 +26,7 @@ class Usuarios():
         self.direccionUsuario = direccionUsuario
         self.password = password
         self.rol_id  = rol_id 
+        self.politicaPrivacidad = politicaPrivacidad
 
          
     @classmethod
@@ -33,7 +35,7 @@ class Usuarios():
 
         if getRow and len(getRow) > 0:
             return cls(getRow[0]['idUsuario'], getRow[0]['nombreUsuario'], getRow[0]['apellidoUsuario'], getRow[0]['correoUsuario'],
-             getRow[0]['telefonoUsuario'], getRow[0]['direccionUsuario'], getRow[0]['password'], getRow[0]['rol_id'])
+             getRow[0]['telefonoUsuario'], getRow[0]['direccionUsuario'], getRow[0]['password'], getRow[0]['rol_id'], getRow[0]['politicaPrivacidad'])
 
     def insertarUsuario(self):
         hashed_pwd = generate_password_hash(self.password, method='pbkdf2:sha256',salt_length=32)
@@ -53,6 +55,7 @@ class Usuarios():
         afectadas = bm.insertDb(sql, [self.nombreUsuario, self.apellidoUsuario, self.correoUsuario, self.telefonoUsuario, self.direccionUsuario, hashed_pwd, self.rol_id, self.idUsuario])
         return (afectadas >0)
 
+
     def eliminarUsuario(self):
         sql = "DELETE FROM Usuarios WHERE idUsuario = ?"
         afectadas = bm.insertDb(sql, [self.idUsuario])
@@ -68,7 +71,7 @@ class Usuarios():
 
         if getRow and len(getRow) == 1:
             if check_password_hash(getRow[0]['password'], password):
-                return ['True', getRow[0]['rol_id'], getRow[0]['idUsuario']]
+                return ['True', getRow[0]['idUsuario']]
 
         return ['False']
 
@@ -78,3 +81,10 @@ class Usuarios():
             if caracter == "'" or caracter == '"' or caracter == " ":
                 return True
         return False
+
+    @staticmethod
+    def actualizarPoliticaDatos(AceptacionPolitica, idUsuario):
+        if AceptacionPolitica == True:
+            _sql = "UPDATE Usuarios SET politicaPrivacidad = ? WHERE idUsuario = ?"
+            politicaAceptada = bm.insertDb(_sql, ['S', idUsuario])
+            return (politicaAceptada  >0)
