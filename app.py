@@ -1,31 +1,35 @@
+#!/usr/bin/python3
+
 from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
+from wtforms.fields.core import FormField
 from forms import *
 from modelos.classModels import Usuarios
-import os
 import yagmail as yag
 import functools
 
-
+# Declaracion e inicializacion de variables
 app = Flask(__name__)
-#SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = "86272a371c5acfb485b4701c837b922ab6d99134ad679002c36ebb136ad18412" #SECRET_KEY
+# SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = "86272a371c5acfb485b4701c837b922ab6d99134ad679002c36ebb136ad18412"  # SECRET_KEY
 mensajeError = "Error: Campo vacio o la informacion solicitada esta incorrecta."
+
 
 # INICIAR SESION
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        
+
         if g.user is None:
-            return redirect( url_for('login'))
-        
+            return redirect(url_for('login'))
+
         return view(**kwargs)
-    
+
     return wrapped_view
 
-#Este decorador hace que flask ejecute la funcion definida 
-#antes de que las peticiones ejecuten la función controladora que solicitan.
+
+# Este decorador hace que flask ejecute la funcion definida
+# antes de que las peticiones ejecuten la función controladora que solicitan.
 @app.before_request
 def cargar_usuario_autenticado():
     user_id = session.get('idUsuario')
@@ -33,7 +37,7 @@ def cargar_usuario_autenticado():
         g.user = None
     else:
         g.user = Usuarios.get_by_id(user_id)
- 
+
 
 # LOGOUT
 @app.route('/logout/')
@@ -42,8 +46,9 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
+
 # LOGIN
-@app.route('/', methods=['GET','POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     global mensajeError
     errorValidacion1 = "Error: Password o Usuario invalido."
@@ -55,23 +60,40 @@ def login():
         return render_template('login.html', form=loginSession)
     else:
         formRequest = LoginForm(request.form)
-        if formRequest.validate_on_submit() == True:
-            if Usuarios.charValidatorPassword(formRequest.password.data) == True:
+        if formRequest.validate_on_submit() is True:
+            if Usuarios.charValidatorPassword(formRequest.password.data) is True:
                 return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion2)
             usuarioLogin = Usuarios.verificarUsuario(formRequest.e_mail.data, formRequest.password.data)
             if usuarioLogin[0] == 'True':
                 session.clear()
-                session['idUsuario'] = usuarioLogin[2]
-                if usuarioLogin[1] == 1:
-                    return redirect(url_for('infoDocente'))
-                elif usuarioLogin[1] == 2:
-                    return redirect(url_for('estudianteMaterias'))
-                elif usuarioLogin[1] == 3:
-                    return redirect(url_for('dashboardAdmin'))
+                session['idUsuario'] = usuarioLogin[1]
+                return redirect(url_for('validacionPolitica'))
             else:
                 return render_template('login.html', form=formRequest, ErrorValidacion=errorValidacion1)
         else:
             return render_template('login.html', mensajeError=mensajeError, form=formRequest)
+
+
+# POLITICA DE PRIVACIDAD
+@app.route('/politica/', methods=['GET', 'POST'])
+@login_required
+def validacionPolitica():
+    errorValidacion = "Para finalizar el registro debe marcar la casilla 'ACEPTO LOS TERMINOS' aceptando los terminos de la Politica de Datos"
+    formFields = checkboxForm()
+
+    if formFields.validate_on_submit() is True:
+        if Usuarios.actualizarPoliticaDatos(formFields.politicaPrivacidad.data, g.user.idUsuario) is True:
+            return redirect(url_for('validacionPolitica'))
+    elif g.user.politicaPrivacidad == 'N':
+        return render_template('politicaDatos.html', mensajeError=errorValidacion, form=formFields)
+
+    if g.user.politicaPrivacidad == 'S':
+        if g.user.rol_id == 1:
+            return redirect(url_for('infoDocente'))
+        elif g.user.rol_id == 2:
+            return redirect(url_for('estudianteMaterias'))
+        elif g.user.rol_id == 3:
+            return redirect(url_for('dashboardAdmin'))
 
 
 # ADMINISTRADOR
@@ -82,6 +104,7 @@ def dashboardAdmin():
         return redirect(url_for('logout'))
     return render_template('administrador/home_admin.html')
 
+
 # ADMINISTRADOR MATERIAS
 @app.route('/administrador/gestionar-materias')
 @login_required
@@ -91,7 +114,7 @@ def adminMaterias():
     return render_template('administrador/admin_materias.html')
 
 
-@app.route('/administrador/crear-materia', methods=['GET','POST'])
+@app.route('/administrador/crear-materia', methods=['GET', 'POST'])
 @login_required
 def crearMateria():
     if g.user.rol_id != 3:
@@ -103,12 +126,13 @@ def crearMateria():
         return render_template('administrador/formularios/form_crearMateria.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = MateriaForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('adminMaterias'))
         else:
             return render_template('administrador/formularios/form_crearMateria.html', mensajeError=mensajeError, form=formRequest)
 
-@app.route('/administrador/editar-materia', methods=['GET','POST'])
+
+@app.route('/administrador/editar-materia', methods=['GET', 'POST'])
 @login_required
 def editarMateria():
     if g.user.rol_id != 3:
@@ -120,10 +144,11 @@ def editarMateria():
         return render_template('administrador/formularios/form_editarMateria.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = MateriaForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('adminMaterias'))
         else:
             return render_template('administrador/formularios/form_editarMateria.html', mensajeError=mensajeError, form=formRequest)
+
 
 # ADMINISTRADOR ACTIVIDADES
 @app.route('/administrador/gestionar-actividades')
@@ -133,7 +158,8 @@ def adminActiv():
         return redirect(url_for('logout'))
     return render_template('administrador/admin_actividades.html')
 
-@app.route('/administrar/crear-actividad', methods=['GET','POST'])
+
+@app.route('/administrar/crear-actividad', methods=['GET', 'POST'])
 @login_required
 def crearActiv():
     if g.user.rol_id != 3:
@@ -145,12 +171,13 @@ def crearActiv():
         return render_template('administrador/formularios/form_crearActividad.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = ActividadesForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('adminActiv'))
         else:
             return render_template('administrador/formularios/form_crearActividad.html', mensajeError=mensajeError, form=formRequest)
 
-@app.route('/administrar/editar-actividad', methods=['GET','POST'])
+
+@app.route('/administrar/editar-actividad', methods=['GET', 'POST'])
 @login_required
 def editarActiv():
     if g.user.rol_id != 3:
@@ -162,10 +189,11 @@ def editarActiv():
         return render_template('administrador/formularios/form_editarActividad.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = ActividadesForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('adminActiv'))
         else:
             return render_template('administrador/formularios/form_editarActividad.html', mensajeError=mensajeError, form=formRequest)
+
 
 # ADMINISTRADOR CALIFICACIONES
 @app.route('/administrador/calificaciones-y-retroalimentaciones')
@@ -175,7 +203,8 @@ def indexCalificacion():
         return redirect(url_for('logout'))
     return render_template('administrador/califi_retroalim.html')
 
-@app.route('/administrador/calificar', methods=['GET','POST'])
+
+@app.route('/administrador/calificar', methods=['GET', 'POST'])
 @login_required
 def califRetroalim():
     if g.user.rol_id != 3:
@@ -187,12 +216,13 @@ def califRetroalim():
         return render_template('administrador/formularios/form_calificar.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = CalificacionesForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('indexCalificacion'))
         else:
             return render_template('administrador/formularios/form_calificar.html', mensajeError=mensajeError, form=formRequest)
 
-@app.route('/administrador/editar-calificacion', methods=['GET','POST'])
+
+@app.route('/administrador/editar-calificacion', methods=['GET', 'POST'])
 @login_required
 def editCalifRetroalim():
     if g.user.rol_id != 3:
@@ -204,10 +234,11 @@ def editCalifRetroalim():
         return render_template('administrador/formularios/form_editarCalificacion.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = CalificacionesForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('indexCalificacion'))
         else:
             return render_template('administrador/formularios/form_editarCalificacion.html', mensajeError=mensajeError, form=formRequest)
+
 
 # ADMINISTRADOR USUARIOS
 @app.route('/administrador/gestionar-usuarios')
@@ -221,7 +252,8 @@ def adminUsuario():
         return render_template('administrador/admin_usuarios.html', listaUsuarios=listaUsuarios)
     return render_template('administrador/admin_usuarios.html')
 
-@app.route('/adminsistrador/crear-usuarios', methods=['GET','POST'])
+
+@app.route('/adminsistrador/crear-usuarios', methods=['GET', 'POST'])
 @login_required
 def crearUsuario():
     if g.user.rol_id != 3:
@@ -237,29 +269,30 @@ def crearUsuario():
         return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True :
-            if formRequest.rol_id.data == '' :
+        if formRequest.validate_on_submit() is True:
+            if formRequest.rol_id.data == '':
                 errorValidacion = 'Seleccione un Rol'
-                return render_template('administrador/formularios/form_crearUsuario.html', 
+                return render_template('administrador/formularios/form_crearUsuario.html',
                 ErrorValidacion=errorValidacion, form=formRequest)
             if formRequest.password.data != formRequest.confirmarPassword.data:
                 errorValidacion = 'Las contraseñas no coinciden'
-                return render_template('administrador/formularios/form_crearUsuario.html', 
+                return render_template('administrador/formularios/form_crearUsuario.html',
                 ErrorValidacion=errorValidacion, form=formRequest)
 
-            nuevoUsuario = Usuarios(formRequest.idUsuario.data, formRequest.nombreUsuario.data, formRequest.apellidoUsuario.data, 
+            nuevoUsuario = Usuarios(formRequest.idUsuario.data, formRequest.nombreUsuario.data, formRequest.apellidoUsuario.data,
             formRequest.correoUsuario.data, formRequest.telefonoUsuario.data, formRequest.direccionUsuario.data, formRequest.password.data, int(formRequest.rol_id.data))
 
             nuevoUsuario.insertarUsuario()
             yagMail = yag.SMTP(correoNotificaciones, claveEmail)
-            yagMail.send(to=formRequest.correoUsuario.data, subject="Su mensaje ha sido recibido",
+            yagMail.send(to=formRequest.correoUsuario.data, subject="Cuenta de Acceso",
             contents="Bienvenido {0}: \n Ahora eres usuario del Gestor de Notas. \n Usuario: {1} \n Clave de acceso: {2} \n \
              Ingresa a: {3}".format(formRequest.nombreUsuario.data, formRequest.correoUsuario.data, formRequest.password.data, 'https://gestor-de-notas.herokuapp.com/'))
             return redirect(url_for('adminUsuario'))
         else:
-            return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError , form=formRequest)
+            return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError, form=formRequest)
 
-@app.route('/administrador/editar-usuario<idUsuario>', methods=['GET','POST'])
+
+@app.route('/administrador/editar-usuario<idUsuario>', methods=['GET', 'POST'])
 @login_required
 def editarUsuario(idUsuario):
     if g.user.rol_id != 3:
@@ -286,25 +319,25 @@ def editarUsuario(idUsuario):
         return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = UsuarioForm(request.form)
-        if formRequest.validate_on_submit() == True :
-            if formRequest.rol_id.data == '' :
+        if formRequest.validate_on_submit() is True:
+            if formRequest.rol_id.data == '':
                 errorValidacion = 'Seleccione un Rol'
-                return render_template('administrador/formularios/form_editarUsuario.html', 
+                return render_template('administrador/formularios/form_editarUsuario.html',
                 ErrorValidacion=errorValidacion, form=formRequest)
             if formRequest.password.data != formRequest.confirmarPassword.data:
                 errorValidacion = 'Las contraseñas no coinciden'
-                return render_template('administrador/formularios/form_editarUsuario.html', 
+                return render_template('administrador/formularios/form_editarUsuario.html',
                 ErrorValidacion=errorValidacion, form=formRequest)
 
             usuario = Usuarios(
-            idUsuario = formRequest.idUsuario.data,
-            nombreUsuario = formRequest.nombreUsuario.data,
-            apellidoUsuario = formRequest.apellidoUsuario.data,
-            correoUsuario = formRequest.correoUsuario.data,
-            telefonoUsuario = formRequest.telefonoUsuario.data,
-            direccionUsuario = formRequest.direccionUsuario.data,
-            password = formRequest.password.data,
-            rol_id = int(formRequest.rol_id.data)
+             idUsuario = formRequest.idUsuario.data,
+             nombreUsuario = formRequest.nombreUsuario.data,
+             apellidoUsuario = formRequest.apellidoUsuario.data,
+             correoUsuario = formRequest.correoUsuario.data,
+             telefonoUsuario = formRequest.telefonoUsuario.data,
+             direccionUsuario = formRequest.direccionUsuario.data,
+             password = formRequest.password.data,
+             rol_id = int(formRequest.rol_id.data)
             )
 
             usuario.actualizarUsuario()
@@ -331,6 +364,7 @@ def editarUsuario(idUsuario):
         else:
             return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
 
+
 @app.route('/administrador/gestionar-usuarios/eliminar-usuario<idUsuario>')
 @login_required
 def eliminarUsuario(idUsuario):
@@ -342,6 +376,7 @@ def eliminarUsuario(idUsuario):
 
     return redirect(url_for('adminUsuario'))
 
+
 # ADMINISTRADOR DOCENTES
 @app.route('/administrador/gestionar-docente')
 @login_required
@@ -350,7 +385,8 @@ def adminDocente():
         return redirect(url_for('logout'))
     return render_template('administrador/admin_docente.html')
 
-@app.route('/administrador/editar-docente', methods=['GET','POST'])
+
+@app.route('/administrador/editar-docente', methods=['GET', 'POST'])
 def editarDocente():
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))
@@ -361,10 +397,11 @@ def editarDocente():
         return render_template('administrador/formularios/form_editarDocente.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = DocenteForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('adminDocente'))
         else:
             return render_template('administrador/formularios/form_editarDocente.html', mensajeError=mensajeError, form=formRequest)
+
 
 # ADMINISTRADOR ESTUDIANTES
 @app.route('/administrador/gestionar-estudiante')
@@ -374,7 +411,8 @@ def adminEstudiante():
         return redirect(url_for('logout'))
     return render_template('administrador/admin_estudiante.html')
 
-@app.route('/administrador/editar-estudiante', methods=['GET','POST'])
+
+@app.route('/administrador/editar-estudiante', methods=['GET', 'POST'])
 @login_required
 def editarEstudiante():
     if g.user.rol_id != 3:
@@ -386,10 +424,11 @@ def editarEstudiante():
         return render_template('administrador/formularios/form_editarEstudiante.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = EstudianteForm(request.form)
-        if formRequest.validate_on_submit() == True:
+        if formRequest.validate_on_submit() is True:
             return redirect(url_for('adminEstudiante'))
         else:
             return render_template('administrador/formularios/form_editarEstudiante.html', mensajeError=mensajeError, form=formRequest)
+
 
 # ADMINISTRADOR INFORMACION PERSONAL
 @app.route('/administrador/informacion-personal')
@@ -399,6 +438,7 @@ def infoAdmin():
         return redirect(url_for('logout'))
     return render_template('administrador/info_admin.html')
 
+
 # ESTUDIANTE
 @app.route('/estudiante')
 @login_required
@@ -407,6 +447,7 @@ def estudianteMaterias():
         return redirect(url_for('logout'))
     return render_template('estudiante/home_estudiante.html')
 
+
 @app.route('/estudiante/materia')
 @login_required
 def materiaActividades():
@@ -414,8 +455,9 @@ def materiaActividades():
         return redirect(url_for('logout'))
 
     id_materia = "id materia"
-    num_actividades = [0,0,0,0]
+    num_actividades = [0, 0, 0, 0]
     return render_template('estudiante/materia_actividades.html', id_materia = id_materia, num_actividades = num_actividades)
+
 
 @app.route('/estudiante/perfil')
 @login_required
@@ -424,7 +466,8 @@ def estudianteInfoPersonal():
         return redirect(url_for('logout'))
 
     nom_estudiante = "Pepito"
-    return render_template('estudiante/info_estudiante.html', nom_estudiante = nom_estudiante )
+    return render_template('estudiante/info_estudiante.html', nom_estudiante = nom_estudiante)
+
 
 @app.route('/estudiante/resumenNotas')
 @login_required
@@ -432,10 +475,11 @@ def estudianteNotasOverall():
     if g.user.rol_id != 2:
         return redirect(url_for('logout'))
 
-    materias = ['Matemáticas','Biología','Inglés','Física']
+    materias = ['Matemáticas', 'Biología', 'Inglés', 'Física']
     docentes = ['Carlos', 'Juan', 'Laura', 'Vanesa']
     notas = [2.5, 4.7, 3.8, 2]
     return render_template('estudiante/overallNotas_estudiante.html', materias = materias, notas = notas, docentes = docentes)
+
 
 # DOCENTE
 @app.route('/docente')
@@ -446,6 +490,7 @@ def infoDocente():
 
     return render_template('docente/home_docente.html')
 
+
 @app.route('/docente/registrarActividad')
 @login_required
 def registrarActividadDocente():
@@ -453,6 +498,7 @@ def registrarActividadDocente():
         return redirect(url_for('logout'))
 
     return render_template('docente/registrarActividad_docente.html')
+
 
 @app.route('/docente/retroalimentacion')
 @login_required
