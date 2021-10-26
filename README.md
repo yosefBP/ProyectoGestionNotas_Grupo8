@@ -5,7 +5,8 @@
 - Realizado con lenguaje Python
 - Framework Flask
 - Diseño de base de datos relacional SQLite
-- Despliegue de la aplicacion WEB en Servidor de la nube
+- Despliegue de la aplicacion WEB en Servidor de la nube Heroku
+- https://gestor-de-notas.herokuapp.com/
 
 ### Autores 🗒
 **Jose David Bermejo Padilla** Back-end
