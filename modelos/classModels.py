@@ -37,12 +37,14 @@ class Usuarios():
             return cls(getRow[0]['idUsuario'], getRow[0]['nombreUsuario'], getRow[0]['apellidoUsuario'], getRow[0]['correoUsuario'],
              getRow[0]['telefonoUsuario'], getRow[0]['direccionUsuario'], getRow[0]['password'], getRow[0]['rol_id'], getRow[0]['politicaPrivacidad'])
 
+
     def insertarUsuario(self):
         hashed_pwd = generate_password_hash(self.password, method='pbkdf2:sha256',salt_length=32)
         numFilas = bm.insertDb("INSERT INTO Usuarios (idUsuario, nombreUsuario, apellidoUsuario, correoUsuario, telefonoUsuario, direccionUsuario, password, rol_id ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [self.idUsuario, self.nombreUsuario, self.apellidoUsuario, self.correoUsuario, self.telefonoUsuario, self.direccionUsuario, hashed_pwd, self.rol_id])
 
         return (numFilas > 0)
+
 
     def actualizarUsuario(self):
         if self.password == "":
@@ -61,9 +63,11 @@ class Usuarios():
         afectadas = bm.insertDb(sql, [self.idUsuario])
         return (afectadas >0)
 
+
     @staticmethod
     def get_all():
         return bm.selectDb("SELECT * FROM Usuarios", None)
+
 
     @staticmethod
     def verificarUsuario(correoUsuario, password):
@@ -75,12 +79,14 @@ class Usuarios():
 
         return ['False']
 
+
     @staticmethod
     def charValidatorPassword(password):
         for caracter in password:
             if caracter == "'" or caracter == '"' or caracter == " ":
                 return True
         return False
+
 
     @staticmethod
     def actualizarPoliticaDatos(AceptacionPolitica, idUsuario):
