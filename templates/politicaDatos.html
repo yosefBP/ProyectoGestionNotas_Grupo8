@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block extras %}
+    <!-- Sweetalert--> 
+    <link data-require="sweet-alert@*" data-semver="0.4.2" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
+    <!-- Otros links -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <!-- Other CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tablas.css') }}">
+{% endblock %}
+
+{% block title %}
+    Politica de Datos
+{% endblock %}
+
+{% block contenido %}
+    <div class="container">
+        <h1>AUTORIZACIÓN PARA EL TRATAMIENTO DE DATOS PERSONALES</h1>
+        <p>a) Acceder en forma gratuita a los datos proporcionados que hayan
+            sido objeto de tratamiento.
+            b) Solicitar la actualización y rectificación de su información frente a
+            datos parciales, inexactos, incompletos, fraccionados, que induzcan a
+            error, o a aquellos cuyo tratamiento esté prohibido o no haya sido
+            autorizado.
+            c) Solicitar prueba de la autorización otorgada.
+            d) Presentar ante la Superintendencia de Industria y Comercio (SIC)
+            quejas por infracciones a lo dispuesto en la normatividad vigente.
+            e) Revocar la autorización y/o solicitar la supresión del dato, a menos
+            que exista un deber legal o contractual que haga imperativo conservar la
+            información.
+            f) Abstenerse de responder las preguntas sobre datos sensibles o
+            sobre datos de las niñas y niños y adolescentes.
+            Estos derechos los podré ejercer a través de los canales o medios
+            dispuestos por ______________ (nombre de la persona jurídica o natural
+            que actuará como Responsable del Tratamiento) para la atención al público,
+            la línea de atención nacional ____________, el correo electrónico
+            XXXXX@XXXXX.com.co y las oficinas de atención al cliente a nivel
+            nacional, cuya información puedo consultar en www.xxxxxx.co,
+            disponibles de lunes a viernes de 8:00 a.m. a 6:00 p.m., para la atención de
+            requerimientos relacionados con el tratamiento de mis datos personales y
+            el ejercicio de los derechos mencionados en esta autorización (Incluir todos
+            los canales o medios que ha dispuesto para la atención de consultas y
+            reclamos. Los citados son solo ejemplos, no implica que deba tenerlos
+            todos).
+            Por todo lo anterior, he otorgado mi consentimiento a _____________
+            (nombre de la persona jurídica o natural que actuará como Responsable del
+            Tratamiento) para que trate mi información personal de acuerdo con la
+            Política de Tratamiento de Datos Personales dispuesta por la sociedad en
+            (medio físico o electrónico, por ejemplo:. ) y que me dio a conocer antes de
+            recolectar mis datos personales.
+            Manifiesto que la presente autorización me fue solicitada y puesta de
+            presente antes de entregar mis datos y que la suscribo de forma libre y
+            voluntaria una vez leída en su totalidad.</p>
+        <p>Manifiesto que me informaron que en caso de recolección de mi
+            información sensible (esto únicamente si se recolectan datos sensibles),
+            tengo derecho a contestar o no las preguntas que me formulen y a entregar
+            o no los datos solicitados. (Lo mismo se debe incluir en caso que se
+            recolecten datos de menores de edad).
+            Entiendo que son datos sensibles aquellos que afectan la intimidad del
+            Titular o cuyo uso indebido puede generar discriminación (Se puede ilustrar
+            con ejemplos que apliquen, como orientación política, convicciones
+            religiosas o filosóficas, datos relativos a la salud, a la vida sexual y los datos
+            biométricos).
+            Manifiesto que me informaron que los datos sensibles que se recolectarán
+            serán utilizados para las siguientes finalidades: (Indicar las finalidades, ver
+            listado de ejemplos).
+            DERECHOS DEL TITULAR
+             Sus derechos como titular del dato son los previstos en la
+            Constitución y en la Ley 1581 de 2012, especialmente los siguientes:
+            a) Acceder en forma gratuita a los datos proporcionados que hayan
+            sido objeto de tratamiento.
+            b) Solicitar la actualización y rectificación de su información frente a
+            datos parciales, inexactos, incompletos, fraccionados, que induzcan a
+            error, o a aquellos cuyo tratamiento esté prohibido o no haya sido
+            autorizado.
+            c) Solicitar prueba de la autorización otorgada.
+            d) Presentar ante la Superintendencia de Industria y Comercio (SIC)
+            quejas por infracciones a lo dispuesto en la normatividad vigente.
+            e) Revocar la autorización y/o solicitar la supresión del dato, a menos
+            que exista un deber legal o contractual que haga imperativo conservar la
+            información.
+            f) Abstenerse de responder las preguntas sobre datos sensibles o
+            sobre datos de las niñas y niños y adolescentes.
+            Estos derechos los podré ejercer a través de los canales o medios
+            dispuestos por ______________ (nombre de la persona jurídica o natural
+            que actuará como Responsable del Tratamiento) para la atención al público,
+            la línea de atención nacional ____________, el correo electrónico
+            XXXXX@XXXXX.com.co y las oficinas de atención al cliente a nivel
+            nacional, cuya información puedo consultar en www.xxxxxx.co,
+            disponibles de lunes a viernes de 8:00 a.m. a 6:00 p.m., para la atención de
+            requerimientos relacionados con el tratamiento de mis datos personales y
+            el ejercicio de los derechos mencionados en esta autorización (Incluir todos
+            los canales o medios que ha dispuesto para la atención de consultas y
+            reclamos. Los citados son solo ejemplos, no implica que deba tenerlos
+            todos).
+            Por todo lo anterior, he otorgado mi consentimiento a _____________
+            (nombre de la persona jurídica o natural que actuará como Responsable del
+            AUTORIZACIÓN
+            PARA EL TRATAMIENTO DE DATOS PERSONALES
+            Tratamiento) para que trate mi información personal de acuerdo con la
+            Política de Tratamiento de Datos Personales dispuesta por la sociedad en
+            (medio físico o electrónico, por ejemplo:. ) y que me dio a conocer antes de
+            recolectar mis datos personales.
+            Manifiesto que la presente autorización me fue solicitada y puesta de
+            presente antes de entregar mis datos y que la suscribo de forma libre y
+            voluntaria una vez leída en su totalidad.</p>
+        <div>
+            <form method="POST" class="form-signin" action="{{ url_for('validacionPolitica') }}" novalidate>
+                {{ form.csrf_token }}
+                <h5>Seleccione la casilla de consentimiento y luego haga click en Finalizar registro</h5>
+                {{ form.politicaPrivacidad.label }}
+                {{ form.politicaPrivacidad(value="Y") }}
+                {{ form.btnSubmit(value='Finalizar Registro', class='btn btn-lg btn-primary btn-block btn-signin') }}
+                {% if form.politicaPrivacidad.errors %}
+                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block Scripts %}
+    <!--script src="admin.js"></script-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+{% endblock %}
