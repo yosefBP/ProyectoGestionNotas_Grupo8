@@ -4,7 +4,8 @@ from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
 from wtforms.fields.core import FormField
 from forms import *
-from modelos.classModels import Usuarios
+from modelos.modelUser import Usuarios
+from modelos.modelMaterias import Materias
 import yagmail as yag
 import functools
 
