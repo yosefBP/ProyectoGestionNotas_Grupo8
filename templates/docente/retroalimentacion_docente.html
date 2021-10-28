@@ -8,8 +8,14 @@
     {% block title %}
     Retroalimentación Docente
     {% endblock %}
-            <!-- CONTENT -->
-            {% block contenido %}
+    {% block menu %}
+    {% include 'docente/menu_docente.html' %}
+    {% endblock %}
+             <!-- CONTENT -->
+             {% block contenido %}
+             <!-- ------------------------------------------------------------------------------------------------------ -->
+            <!--Despues agrager en este container un padding-->
+             <div class="container">
             <h1>Docente</h1>
             <h2>Retroalimentación Actividad y Notas</h2>
             <!--Formulario-->
