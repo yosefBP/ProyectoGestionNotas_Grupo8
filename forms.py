@@ -77,3 +77,10 @@ class CalificacionesForm(FlaskForm):
 class checkboxForm(FlaskForm):
     politicaPrivacidad = BooleanField('Acepto los terminos', validators=[DataRequired(), ])
     btnSubmit = SubmitField()
+
+class Actividades_DocenteForm(FlaskForm):
+    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    nombreMateria = StringField('Materia', validators=[validators.required()])
+    idActividad = IntegerField('Id Actividad', validators=[validators.required()])
+    nombreActividad = TextAreaField('Actividad', validators=[validators.required()])
+    btnSubmit = SubmitField("Crear Nueva Actividad")
