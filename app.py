@@ -2,10 +2,11 @@
 
 from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
+from wtforms.validators import Length
 from forms import *
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
-#from modelos.modelDocente import Docentes
+from modelos.modelDocente import Docentes
 import yagmail as yag
 import functools
 
@@ -403,12 +404,15 @@ def eliminarUsuario(idUsuario):
 def adminDocente():
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))
-    listaDocente = ""
-    #listaDocentes = Docentes.listaDocentes()
 
-    #if listaDocentes:
-        #return render_template('administrador/admin_docente.html', listaDocentes=listaDocente)
-    return render_template('administrador/admin_docente.html')
+    listaDocentes = Docentes.listaDocentes()
+    listaMaterias = Docentes.materiaDocente(listaDocentes[0]['idUsuario'])
+    if len(listaMaterias) > 1:
+        for i in range(len(listaMaterias)):
+            listaMaterias = listaMaterias[i]
+            listaDocentes = listaDocentes[0]
+            return render_template('administrador/admin_docente.html', listaDocentes=listaDocentes, listaMaterias=listaMaterias)
+    #return render_template('administrador/admin_docente.html')
 
 
 @app.route('/administrador/editar-docente/<idUsuario>', methods=['GET', 'POST'])
