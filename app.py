@@ -4,11 +4,13 @@ from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
 from wtforms.validators import Length
 from forms import *
+from modelos.base_models import selectDb
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
 from modelos.modelDocente import Docentes
 import yagmail as yag
 import functools
+import random
 
 # Declaracion e inicializacion de variables
 app = Flask(__name__)
@@ -533,6 +535,7 @@ def estudianteNotasOverall():
     
     for n in range(len(materia_usuario)):
         materias.append(materia_usuario[n]['nombreMateria'])
+        notas.append(round(random.uniform(0.0, 5.0),1))
 
     docentes = ['Carlos', 'Juan', 'Laura', 'Vanesa']
     return render_template('estudiante/overallNotas_estudiante.html', materias = materias, notas = notas, docentes = docentes)
@@ -544,7 +547,11 @@ def infoDocente():
     if g.user.rol_id != 1:
         return redirect(url_for('logout'))
 
-    return render_template('docente/home_docente.html')
+    
+    obj_docente = g.user
+    if obj_docente:
+        return render_template('docente/home_docente.html', item=obj_docente, listaMaterias= Materias.materiaUsuario(g.user.idUsuario))
+
 
 
 @app.route('/docente/registrarActividad')
@@ -556,6 +563,8 @@ def registrarActividadDocente():
     return render_template('docente/registrarActividad_docente.html')
 
 
+
+
 @app.route('/docente/retroalimentacion')
 @login_required
 def retroalimentacionDocente():
@@ -563,3 +572,15 @@ def retroalimentacionDocente():
         return redirect(url_for('logout'))
 
     return render_template('docente/retroalimentacion_docente.html')
+
+@app.route('/docente/registrarActividad/', methods=['GET'])
+@login_required
+def registrarActividadDocente2():
+    if g.user.rol_id != 1:
+        return redirect(url_for('logout'))
+
+    if request.method == 'GET':
+        formulario_actividad = Actividades_DocenteForm()
+        return render_template('docente/registrarActividad_docente2.html', form=formulario_actividad)
+
+    
