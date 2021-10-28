@@ -547,10 +547,8 @@ def infoDocente():
     if g.user.rol_id != 1:
         return redirect(url_for('logout'))
 
-    
-    obj_docente = g.user
-    if obj_docente:
-        return render_template('docente/home_docente.html', item=obj_docente, listaMaterias= Materias.materiaUsuario(g.user.idUsuario))
+    return render_template('docente/home_docente.html')
+
 
 @app.route('/docente/registrarActividad')
 @login_required
