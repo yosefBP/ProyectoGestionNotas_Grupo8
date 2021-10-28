@@ -547,7 +547,11 @@ def infoDocente():
     if g.user.rol_id != 1:
         return redirect(url_for('logout'))
 
-    return render_template('docente/home_docente.html')
+    
+    obj_docente = g.user
+    if obj_docente:
+        return render_template('docente/home_docente.html', item=obj_docente, listaMaterias= Materias.materiaUsuario(g.user.idUsuario))
+
 
 
 @app.route('/docente/registrarActividad')
@@ -559,6 +563,8 @@ def registrarActividadDocente():
     return render_template('docente/registrarActividad_docente.html')
 
 
+
+
 @app.route('/docente/retroalimentacion')
 @login_required
 def retroalimentacionDocente():
@@ -566,3 +572,15 @@ def retroalimentacionDocente():
         return redirect(url_for('logout'))
 
     return render_template('docente/retroalimentacion_docente.html')
+
+@app.route('/docente/registrarActividad/', methods=['GET'])
+@login_required
+def registrarActividadDocente2():
+    if g.user.rol_id != 1:
+        return redirect(url_for('logout'))
+
+    if request.method == 'GET':
+        formulario_actividad = Actividades_DocenteForm()
+        return render_template('docente/registrarActividad_docente2.html', form=formulario_actividad)
+
+    
