@@ -405,10 +405,10 @@ def adminDocente():
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))
     listaDocente = ""
-    listaDocentes = Docentes.listaDocentes()
+    #listaDocentes = Docentes.listaDocentes()
 
-    if listaDocentes:
-        return render_template('administrador/admin_docente.html', listaDocentes=listaDocente)
+    #if listaDocentes:
+        #return render_template('administrador/admin_docente.html', listaDocentes=listaDocente)
     return render_template('administrador/admin_docente.html.html')
 
 
