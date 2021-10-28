@@ -3,7 +3,6 @@
 from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
 from forms import *
-from modelos.base_models import selectDb
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
 from modelos.modelDocente import Docentes
