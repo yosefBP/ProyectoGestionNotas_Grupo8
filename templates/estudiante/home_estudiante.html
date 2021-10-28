@@ -45,50 +45,27 @@
     <!-- CARDS de materias -->
 
     <div class="row pt-5">
+        {% for materia in materias %}
         <div class="col-12 col-lg-2 m-4">
             <div class="card text-white bg-custom" style="width: 12rem;">
-                <img src="{{url_for('static', filename='img/thunk.png')}}" class="card-img-top" alt="...">
+                {% if materia == 'Ingles' %}
+                    <img src="{{url_for('static', filename='img/ingles.jpg')}}" class="card-img-top" alt="...">
+                {% elif materia == 'Calculo 1' %}
+                    <img src="{{url_for('static', filename='img/calculo_1.jpg')}}" class="card-img-top" alt="...">
+                {% elif materia == 'Geografia' %}
+                    <img src="{{url_for('static', filename='img/geografia.png')}}" class="card-img-top" alt="...">
+                {% else %}
+                    <img src="{{url_for('static', filename='img/biologia.jpg')}}" class="card-img-top" alt="...">
+                {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">Materia 1</h5>
-                    <p class="card-text">Código materia</p>
+                    <h5 class="card-title"> {{materia}} </h5>
+                    <p class="card-text">Código Materia: {{ id_materias[loop.index0] }}</p>
                     <p class="card-text">Profesor materia</p>
                     <a href="{{ url_for('materiaActividades') }}" class="btn btn-primary">Ver actividades</a>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-2 m-4">
-            <div class="card text-white bg-custom" style="width: 12rem;">
-                <img src="{{url_for('static', filename='img/thunk.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Materia 2</h5>
-                    <p class="card-text">Código materia</p>
-                    <p class="card-text">Profesor materia</p>
-                    <a href="{{ url_for('materiaActividades') }}" class="btn btn-primary">Ver actividades</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-2 m-4">
-            <div class="card text-white bg-custom" style="width: 12rem;">
-                <img src="{{url_for('static', filename='img/thunk.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Materia 3</h5>
-                    <p class="card-text">Código materia</p>
-                    <p class="card-text">Profesor materia</p>
-                    <a href="{{ url_for('materiaActividades') }}" class="btn btn-primary">Ver actividades</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-2 m-4">
-            <div class="card text-white bg-custom" style="width: 12rem;">
-                <img src="{{url_for('static', filename='img/thunk.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Materia N</h5>
-                    <p class="card-text">Código materia</p>
-                    <p class="card-text">Profesor materia</p>
-                    <a href="{{ url_for('materiaActividades') }}" class="btn btn-primary">Ver actividades</a>
-                </div>
-            </div>
-        </div>
+        {% endfor %}    
     </div>
 </div>
 {% endblock %}
