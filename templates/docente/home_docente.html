@@ -5,31 +5,54 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
     integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
     crossorigin="anonymous">
+
     {% endblock %}
     {% block title %}
     Home Docente 
     {% endblock %}
-
+    {% block menu %}
+    {% include 'docente/menu_docente.html' %}
+    {% endblock %}
              <!-- CONTENT -->
              {% block contenido %}
-             <div>
+             <!-- ------------------------------------------------------------------------------------------------------ -->
+            <!--Despues agrager en este container un padding-->
+             <div class="container">
                 <h1>Docente</h1>
                 <section>
                 <h2> Información Personal</h2>
                 <br>
+
+                
                     <div class="container first-container">
-                      
+                        {% if item %}
                         <div class="row first-row" >
+
                             <div class="col-6">ID Usuario</div>
-                            <div class= "col-6 first-col"></div> <!-- En cada fila deje una columna vacía-->
+                            <div class= "col-6 first-col"> {{ item.idUsuario }} </div> <!-- En cada fila deje una columna vacía-->
                             <div class="w-75 p-3 "></div>
-                            <div class="col-6 first-col" >Nombre</div>
-                            <div class= "col-6 first-col"></div> 
-                            <div class="w-75 p-3 "></div>
+
+                            
                             <div class="col-6 first-col">Correo Electronico</div>
-                            <div class= "col-6 first-col"></div>
+                            <div class= "col-6 first-col"> {{ item.correoUsuario }} </div>
                             <div class="w-75 p-3"></div>
-                        
+
+                            <div class="col-6 first-col" >Nombre</div>
+                            <div class= "col-6 first-col"> {{ item.nombreUsuario }} </div> 
+                            <div class="w-75 p-3 "></div>
+
+                            <div class="col-6 first-col" >Apellido</div>
+                            <div class= "col-6 first-col"> {{ item.apellidoUsuario }} </div> 
+                            <div class="w-75 p-3 "></div>
+
+                            <div class="col-6 first-col" >Telefono</div>
+                            <div class= "col-6 first-col"> {{ item.telefonoUsuario }} </div> 
+                            <div class="w-75 p-3 "></div>
+
+                            <div class="col-6 first-col" >Nombre</div>
+                            <div class= "col-6 first-col"> {{ item.nombreUsuario }} </div> 
+                            <div class="w-75 p-3 "></div>
+                        {% endif %}
                         </div>
                     </div>
                 </section>
@@ -61,42 +84,35 @@
                         </div>
                     </div>
                 </section>
-        
                 <br>
+
+                <!--------------------------------------------------------------------------------------------------------------------->
+
                 <section> <!--Materias-->
-                    <div class="card">
-                        <div class="card-header">Materias</div>
-                        <div class="card-body">
-                            <h5 class="card-title">Materia #1 </h5>
-                            <p class="card-text">info</p>
-                        </div>
-                    </div>
-                </section>
-                <section> <!--Materias-->
+                {% if listaMaterias %}
+                    {% for Materias in listaMaterias %}
                     <div class="card">
                         <div class="card-header"></div>
+
                         <div class="card-body">
-                            <h5 class="card-title">Materia #2 </h5>
-                            <p class="card-text">info</p>
+                            <h5 class="card-title"> {{Materias.nombreMateria }}</h5>
+                            <p class="card-text"> ID de la materia</p>
+                            <p class="card-text">{{ Materias.idMateria }}</p>
                         </div>
+                    {% endfor %}
                     </div>
-                </section>
-                <section> <!--Materias-->
-                    <div class="card">
-                        <div class="card-header"></div>
-                        <div class="card-body">
-                            <h5 class="card-title">Materia #3 </h5>
-                            <p class="card-text">info</p>
-                        </div>
-                    </div>
-                </section>
+                {% endif%}
+                
              </div>
              {% endblock %}
           <!-- END CONTENT -->
 
     <!--SCRIPTS-->
       {% block Scripts %}
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" 
+      crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
       {% endblock %}
    <!--END SCRIPTS-->
