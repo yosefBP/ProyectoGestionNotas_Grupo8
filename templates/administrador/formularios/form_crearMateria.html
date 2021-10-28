@@ -23,14 +23,7 @@
         <div class="card-body">
           <h2 class="card-title">CREAR MATERIA</h2>
           <form action="{{ url_for('crearMateria') }}" method="POST" novalidate>
-            {{ form.csrf_token }}
-            <div class="form-group">
-                {{ form.idMateria.label }}
-                {{ form.idMateria(class="form-control", style="font-size: 14px;")}}
-                {% if form.idMateria.errors %}
-                <span style="font-size: 14px; color: red;">{{ mensajeError }}</span>
-                {% endif %}
-            </div>                      
+            {{ form.csrf_token }}                   
             <div class="form-group">
                 {{ form.nombreMateria.label }}
                 {{ form.nombreMateria(class="form-control", style="font-size: 14px;")}}

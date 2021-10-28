@@ -49,7 +49,7 @@ class EstudianteForm(FlaskForm):
 
 
 class MateriaForm(FlaskForm):
-    idMateria = IntegerField('Id Materia', validators=[validators.required()])
+    idMateria = IntegerField('Id Materia')
     nombreMateria = StringField('Nombre', validators=[validators.required()])
     btnSubmit = SubmitField()
 

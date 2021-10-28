@@ -16,13 +16,17 @@
         </tr>
         </thead>
         <tbody id="datavendedor">
+            {% if listaMaterias %}
+                {% for item in listaMaterias %}
             <tr>           
                 <th scope='row'>
-                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarMateria')}}" role="button">EDITAR</a></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>00001A</td>
-                <td>Geografia</td>
+                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarMateria', idMateria=item.idMateria)}}" role="button">EDITAR</a></th>
+                    <td><a id="btnCalificar" class="btn btn-danger" href="{{url_for('eliminarMateria', idMateria=item.idMateria)}}" role="button">ELIMINAR</a></td>   
+                <td>{{ item.idMateria }}</td>
+                <td>{{ item.nombreMateria }}</td>
             </tr>
+                {% endfor %}
+            {% endif %}
         </tbody>
     </table>
     <a id="btnCalificar" class="btn btn-primary" href="{{url_for('crearMateria')}}" role="button">Crear Materia</a>

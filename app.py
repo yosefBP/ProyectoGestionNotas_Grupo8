@@ -2,10 +2,10 @@
 
 from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
-from wtforms.fields.core import FormField
 from forms import *
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
+from modelos.modelDocente import Docentes
 import yagmail as yag
 import functools
 
@@ -112,7 +112,8 @@ def dashboardAdmin():
 def adminMaterias():
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))
-    return render_template('administrador/admin_materias.html')
+    materias = Materias.get_all()
+    return render_template('administrador/admin_materias.html', listaMaterias=materias)
 
 
 @app.route('/administrador/crear-materia', methods=['GET', 'POST'])
@@ -128,27 +129,45 @@ def crearMateria():
     else:
         formRequest = MateriaForm(request.form)
         if formRequest.validate_on_submit() is True:
+            materiaNueva = Materias(idMateria=formRequest.idMateria.data, nombreMateria=formRequest.nombreMateria.data)
+            materiaNueva.insertarMateria()
             return redirect(url_for('adminMaterias'))
         else:
             return render_template('administrador/formularios/form_crearMateria.html', mensajeError=mensajeError, form=formRequest)
 
 
-@app.route('/administrador/editar-materia', methods=['GET', 'POST'])
+@app.route('/administrador/editar-materia/<idMateria>', methods=['GET', 'POST'])
 @login_required
-def editarMateria():
+def editarMateria(idMateria):
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))
 
     global mensajeError
+
     if request.method == 'GET':
         form = MateriaForm()
+        materia = Materias.get_by_id(idMateria)
+        form.idMateria.data = materia.idMateria
+        form.nombreMateria.data = materia.nombreMateria
         return render_template('administrador/formularios/form_editarMateria.html', mensajeError=mensajeError, form=form)
     else:
         formRequest = MateriaForm(request.form)
         if formRequest.validate_on_submit() is True:
+            materiaEditada = Materias(idMateria=formRequest.idMateria.data, nombreMateria=formRequest.nombreMateria.data)
+            materiaEditada.actualizarMateria()
             return redirect(url_for('adminMaterias'))
         else:
             return render_template('administrador/formularios/form_editarMateria.html', mensajeError=mensajeError, form=formRequest)
+
+@app.route('/administrador/gestionar-materias/eliminar-materia/<idMateria>')
+@login_required
+def eliminarMateria(idMateria):
+    if g.user.rol_id != 3:
+        return redirect(url_for('logout'))
+
+    materia = Materias.get_by_id(idMateria)
+    materia.eliminarMateria()
+    return redirect(url_for('adminMaterias'))
 
 
 # ADMINISTRADOR ACTIVIDADES
@@ -293,7 +312,7 @@ def crearUsuario():
             return render_template('administrador/formularios/form_crearUsuario.html', mensajeError=mensajeError, form=formRequest)
 
 
-@app.route('/administrador/editar-usuario<idUsuario>', methods=['GET', 'POST'])
+@app.route('/administrador/editar-usuario/<idUsuario>', methods=['GET', 'POST'])
 @login_required
 def editarUsuario(idUsuario):
     if g.user.rol_id != 3:
@@ -366,7 +385,7 @@ def editarUsuario(idUsuario):
             return render_template('administrador/formularios/form_editarUsuario.html', mensajeError=mensajeError, form=formRequest)
 
 
-@app.route('/administrador/gestionar-usuarios/eliminar-usuario<idUsuario>')
+@app.route('/administrador/gestionar-usuarios/eliminar-usuario/<idUsuario>')
 @login_required
 def eliminarUsuario(idUsuario):
     if g.user.rol_id != 3:
@@ -384,10 +403,15 @@ def eliminarUsuario(idUsuario):
 def adminDocente():
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))
-    return render_template('administrador/admin_docente.html')
+    listaDocente = ""
+    listaDocentes = Docentes.listaDocentes()
+
+    if listaDocentes:
+        return render_template('administrador/admin_docente.html', listaDocentes=listaDocente)
+    return render_template('administrador/admin_docente.html.html')
 
 
-@app.route('/administrador/editar-docente', methods=['GET', 'POST'])
+@app.route('/administrador/editar-docente/<idUsuario>', methods=['GET', 'POST'])
 def editarDocente():
     if g.user.rol_id != 3:
         return redirect(url_for('logout'))

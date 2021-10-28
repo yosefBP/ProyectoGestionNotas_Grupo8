@@ -13,13 +13,12 @@ class Materias():
     idDocente = Any
 
 
-    def __init__(self, idMateria: int, nombreMateria: str, idDocente: int):
+    def __init__(self, idMateria: int, nombreMateria: str):
         """
         Constructor de la clase Materia.
         """
         self.idMateria = idMateria
         self.nombreMateria = nombreMateria
-        self.idDocente = idDocente
 
 
     @classmethod
@@ -62,7 +61,7 @@ class Materias():
         """
         Actualiza una materia en la base de datos.
         """
-        fila = bm.updateDb("UPDATE Materias SET nombreMateria = ? WHERE idMateria = ?",
+        fila = bm.insertDb("UPDATE Materias SET nombreMateria = ? WHERE idMateria = ?",
         [self.nombreMateria, self.idMateria])
 
         return (fila == 1)
@@ -72,7 +71,7 @@ class Materias():
         """
         Elimina una materia de la base de datos.
         """
-        fila = bm.deleteDb("DELETE FROM Materias WHERE idMateria = ?", [self.idMateria])
+        fila = bm.insertDb("DELETE FROM Materias WHERE idMateria = ?", [self.idMateria])
 
         return (fila == 1)
 

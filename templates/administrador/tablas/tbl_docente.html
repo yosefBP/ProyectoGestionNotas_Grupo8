@@ -31,15 +31,21 @@
         </tr>
         </thead>
         <tbody id="datavendedor">
+
+          {% if listaDocentes %}
+            {% for item in listaDocentes %}
+
             <tr>           
                 <th scope='row'>
-                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarDocente')}}" role="button">EDITAR</a></th>
-                <td><button type='button' class='btn btn-danger' >ELIMINAR</button></td>   
-                <td>146546</td>
+                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarDocente', idUsuario=item.idUsuario)}}" role="button">EDITAR</a></th>
+                <td><a id="btnCalificar" class="btn btn-danger" href="#" role="button">ELIMINAR</a></td> 
+                <td>1</td>
                 <td>Jose Perez</td>
-                <td>00012A</td>
-                <td>Geografia</td>
+                <td>{{ item.idMateria }}</td>
+                <td>{{ item.nombreMateria }}</td>
             </tr>
+              {% endfor %}
+            {% endif %}
         </tbody>
     </table>
 </div>
