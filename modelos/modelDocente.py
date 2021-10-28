@@ -38,12 +38,9 @@ class Docentes():
         """
         Obtiene todas las materias de la base de datos.
         """
-        listaDocentes = []
         dicDocente = {}
         docentes = bm.selectDb("SELECT idUsuario, nombreUsuario FROM Usuarios WHERE rol_id = ? AND idusuario IN (SELECT id_usuario FROM MateriaUsuarios)", [1])
-        print(docentes[0]['idUsuario'])
         dicDocente.setdefault(docentes[0]['idUsuario'], docentes[0]['nombreUsuario'])
-        print(dicDocente)
         return docentes
 
     @staticmethod

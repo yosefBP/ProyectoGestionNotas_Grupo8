@@ -33,22 +33,18 @@
         <tbody id="datavendedor">
 
           {% if listaDocentes %}
-          {% if listaMaterias %}
-            {% for doc in listaDocentes %}
-            {% for mat in listaMaterias %}
+            {% for item in listaDocentes %}
 
             <tr>           
                 <th scope='row'>
-                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarDocente', idUsuario=doc.idUsuario)}}" role="button">EDITAR</a></th>
+                    <a id="btnCalificar" class="btn btn-success" href="{{url_for('editarDocente', idUsuario=item.idUsuario)}}" role="button">EDITAR</a></th>
                 <td><a id="btnCalificar" class="btn btn-danger" href="#" role="button">ELIMINAR</a></td> 
-                <td>{{ doc.idUsuario}}</td>
-                <td>{{ doc.nombreUsuario}}</td>
-                <td>{{ mat.idMateria }}</td>
-                <td>{{ mat.nombreMateria }}</td>
+                <td>{{ item.idUsuario}}</td>
+                <td>{{ item.nombreUsuario}}</td>
+                <td></td>
+                <td></td>
             </tr>
               {% endfor %}
-              {% endfor %}
-            {% endif %}
             {% endif %}
         </tbody>
     </table>

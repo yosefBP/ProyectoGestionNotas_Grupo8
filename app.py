@@ -407,12 +407,9 @@ def adminDocente():
 
     listaDocentes = Docentes.listaDocentes()
     listaMaterias = Docentes.materiaDocente(listaDocentes[0]['idUsuario'])
-    if len(listaMaterias) > 1:
-        for i in range(len(listaMaterias)):
-            listaMaterias = listaMaterias[i]
-            listaDocentes = listaDocentes[0]
-            return render_template('administrador/admin_docente.html', listaDocentes=listaDocentes, listaMaterias=listaMaterias)
-    #return render_template('administrador/admin_docente.html')
+
+    print(listaDocentes, listaMaterias)
+    return render_template('administrador/admin_docente.html', listaDocentes=listaDocentes, listaMaterias=listaMaterias)
 
 
 @app.route('/administrador/editar-docente/<idUsuario>', methods=['GET', 'POST'])
