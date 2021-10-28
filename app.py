@@ -4,11 +4,13 @@ from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
 from wtforms.validators import Length
 from forms import *
+from modelos.base_models import selectDb
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
 from modelos.modelDocente import Docentes
 import yagmail as yag
 import functools
+import random
 
 # Declaracion e inicializacion de variables
 app = Flask(__name__)
@@ -536,6 +538,7 @@ def estudianteNotasOverall():
     
     for n in range(len(materia_usuario)):
         materias.append(materia_usuario[n]['nombreMateria'])
+        notas.append(round(random.uniform(0.0, 5.0),1))
 
     docentes = ['Carlos', 'Juan', 'Laura', 'Vanesa']
     return render_template('estudiante/overallNotas_estudiante.html', materias = materias, notas = notas, docentes = docentes)
