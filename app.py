@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, g, session
 from forms import *
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
-from modelos.modelDocente import Docentes
+#from modelos.modelDocente import Docentes
 import yagmail as yag
 import functools
 
