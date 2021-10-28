@@ -4,6 +4,7 @@ from typing import Any
 from flask import Flask, render_template, request, redirect, url_for, g, session
 from wtforms.fields.core import FormField
 from forms import *
+from modelos.base_models import selectDb
 from modelos.modelUser import Usuarios
 from modelos.modelMaterias import Materias
 import yagmail as yag
@@ -446,7 +447,17 @@ def infoAdmin():
 def estudianteMaterias():
     if g.user.rol_id != 2:
         return redirect(url_for('logout'))
-    return render_template('estudiante/home_estudiante.html')
+    
+    materia_usuario = Materias.materiaUsuario(g.user.idUsuario)
+
+    materias = []
+    id_materias = []
+    
+    for n in range(len(materia_usuario)):
+        materias.append(materia_usuario[n]['nombreMateria'])
+        id_materias.append(materia_usuario[n]['idMateria'])
+
+    return render_template('estudiante/home_estudiante.html', materias = materias, id_materias = id_materias)
 
 
 @app.route('/estudiante/materia')
@@ -466,8 +477,24 @@ def estudianteInfoPersonal():
     if g.user.rol_id != 2:
         return redirect(url_for('logout'))
 
-    nom_estudiante = "Pepito"
-    return render_template('estudiante/info_estudiante.html', nom_estudiante = nom_estudiante)
+    materia_usuario = Materias.materiaUsuario(g.user.idUsuario)
+    notas = Materias.get_notas(g.user.idUsuario)
+
+    promedio = 0.0
+    acum = 0.0
+
+    nombre = g.user.nombreUsuario
+    apellidos = g.user.apellidoUsuario
+    correo = g.user.correoUsuario
+    codigo = g.user.idUsuario
+    cant_materias = len(materia_usuario)
+    for n in range(len(notas)):
+        acum = acum + notas[n]['calificacion']
+    promedio = round(acum/len(notas),1)
+
+    
+    return render_template('estudiante/info_estudiante.html', nombre = nombre, apellidos = apellidos, correo = correo, codigo = codigo, 
+                                                                cant_materias = cant_materias, promedio = promedio)
 
 
 @app.route('/estudiante/resumenNotas')
@@ -475,12 +502,16 @@ def estudianteInfoPersonal():
 def estudianteNotasOverall():
     if g.user.rol_id != 2:
         return redirect(url_for('logout'))
+    materia_usuario = Materias.materiaUsuario(g.user.idUsuario)
+    notas_usuario = Materias.get_notas(g.user.idUsuario)
+    materias = []
+    notas = []
+    
+    for n in range(len(materia_usuario)):
+        materias.append(materia_usuario[n]['nombreMateria'])
 
-    materias = ['Matemáticas', 'Biología', 'Inglés', 'Física']
     docentes = ['Carlos', 'Juan', 'Laura', 'Vanesa']
-    notas = [2.5, 4.7, 3.8, 2]
     return render_template('estudiante/overallNotas_estudiante.html', materias = materias, notas = notas, docentes = docentes)
-
 
 # DOCENTE
 @app.route('/docente')

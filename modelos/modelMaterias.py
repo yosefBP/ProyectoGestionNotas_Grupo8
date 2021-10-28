@@ -47,6 +47,18 @@ class Materias():
         """
         return bm.selectDb("SELECT * FROM Materias WHERE idMateria IN (SELECT id_materia FROM MateriaUsuarios WHERE id_usuario = ?)", [idUsuario])
 
+    @staticmethod
+    def get_notas(idUsuario: int):
+        """
+        Obtiene todas las notas del usuario.
+        """
+        return bm.selectDb("SELECT calificacion FROM Calificaciones WHERE id_usuario = ?", [idUsuario])
+
+    #@staticmethod
+    #def get_resumen(idUsuario: int):
+        #bm.selectDb("SELECT * FROM Materias WHERE idMateria IN (SELECT id_materia FROM MateriaUsuarios WHERE id_usuario = ?)", [idUsuario])
+
+
 
     def insertarMateria(self):
         """
