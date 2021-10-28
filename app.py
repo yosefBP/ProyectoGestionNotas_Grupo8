@@ -409,7 +409,7 @@ def adminDocente():
 
     #if listaDocentes:
         #return render_template('administrador/admin_docente.html', listaDocentes=listaDocente)
-    return render_template('administrador/admin_docente.html.html')
+    return render_template('administrador/admin_docente.html')
 
 
 @app.route('/administrador/editar-docente/<idUsuario>', methods=['GET', 'POST'])
